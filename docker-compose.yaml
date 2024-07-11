@@ -5,8 +5,10 @@ networks:
 
 
 services:
-  coreConnectorUnderTest:
-    image: mojaloop/mifos-core-connector:local #replace with image to your core connector
+  coreConnectorUnderTest: 
+    build:
+      context: .
+    image: mojaloop/mifos-core-connector:latest #replace with image to your core connector
     networks:
       - mojaloop-net
     env_file: .env.example
