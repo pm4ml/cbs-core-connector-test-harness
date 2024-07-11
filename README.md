@@ -12,7 +12,9 @@ Here is a diagram that illustrates role of a core connector in a typical mojaloo
 
 ![CBS Integratio Overview](./assets/CBS%20Integration%20Overview.png)
 
-In the illustration, we see the core connector 
+In the illustration, we see the core connector being used as an adaptor between the FSP Core Banking System and the Mojaloop Connector to facilitate payments. 
+
+To develop a core connector 
 # Setup
 
 

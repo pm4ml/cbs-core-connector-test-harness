@@ -7,7 +7,7 @@ networks:
 services:
   coreConnectorUnderTest: 
     build:
-      context: .
+      context: ./src/
     image: mojaloop/mifos-core-connector:latest #replace with image to your core connector
     networks:
       - mojaloop-net
