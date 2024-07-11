@@ -14,7 +14,16 @@ Here is a diagram that illustrates role of a core connector in a typical mojaloo
 
 In the illustration, we see the core connector being used as an adaptor between the FSP Core Banking System and the Mojaloop Connector to facilitate payments. 
 
-To develop a core connector 
+A core connector is an api server that receives requests from the mojaloop connector and brokers them to your core banking system and vice versa to perform payment operations.
+
+The core connector is supposed to implement and expose two apis for it to be able to effectively support payment operations in a mojaloop scheme.
+
+Below is an architecture diagram that shows how a core connector supports payee receipt of funds from a mojaloop scheme.
+
+![Payee Architecture](./assets/CBS%20Integration%20Diagrams-Payee%20Architectural%20Flow.drawio.png)
+
+In this architecture the core connector is supporting the 
+
 # Setup
 
 
