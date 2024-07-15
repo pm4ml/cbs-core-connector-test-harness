@@ -25,7 +25,7 @@ info:
   license:
     name: Apache License Version 2.0, January 2004
     url: https://github.com/mojaloop/documentation/blob/main/LICENSE.md
-  version: 1.0.0
+  version: 2.1.0
 paths:
   /:
     get:
@@ -61,45 +61,7 @@ paths:
             integration or a payment status response if it is single
             integration
   /send-money/{id}:
-    put:
-      summary: Confirm send money
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConfirmSendMoney'
-      tags:
-        - Send Money 
-      responses:
-        '200':
-          description: Send money confirmed successfully
-        '400':
-          description: Bad request
-
-  /merchant-payment:
     post:
-      summary: Send Money endpoint 
-      description: >- 
-        The Endpoint used by the DFSP Operations application to initiate send money 
-        requests to the mojaloop connector
-      requestBody:
-        description: Send Money request body
-        content:
-          application/json:
-            schema: 
-              $ref: "#/components/schemas/transferRequest"
-      tags:
-        - Merchant Payments 
-      responses:
-        '200':
-          description: >-
-            Response for send money request. A quote if it is double 
-            integration or a payment status response if it is single
-            integration
-  
-  /merchant-payment/{id}:
-    put:
       summary: Confirm send money
       requestBody:
         required: true
@@ -107,8 +69,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ConfirmSendMoney'
-      tags:
-        - Merchant Payments 
       responses:
         '200':
           description: Send money confirmed successfully

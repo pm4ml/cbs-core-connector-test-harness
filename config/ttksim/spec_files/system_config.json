@@ -82,16 +82,16 @@
       "additionalApi": true
     },
     {
-      "type": "SDK Backend API",
+      "type": "payer",
       "version": "1.0",
-      "folderPath": "SDK Backend API_1.0",
+      "folderPath": "payer_1.0",
       "asynchronous": false,
       "additionalApi": true
     },
     {
-      "type": "PaymentTokenAdapter",
-      "version": "0.1",
-      "folderPath": "PaymentTokenAdapter_0.1",
+      "type": "payee",
+      "version": "1.0",
+      "folderPath": "payee_1.0",
       "asynchronous": false,
       "additionalApi": true
     }

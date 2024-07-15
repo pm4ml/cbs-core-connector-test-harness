@@ -22,7 +22,9 @@ Below is an architecture diagram that shows how a core connector supports payee 
 
 ![Payee Architecture](./assets/CBS%20Integration%20Diagrams-Payee%20Architectural%20Flow.drawio.png)
 
-In this architecture the core connector is supporting the 
+In this architecture the core connector is depicted as a stateless synchronous api that supports the crediting of funds into an beneficiaries account.
+
+
 
 # Setup
 

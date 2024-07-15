@@ -1,0 +1,49 @@
+Fields for send money post
+REQ
+- homeTransactionId
+- payeeId
+- payeeIdType
+- sendAmount 
+- sendCurrency
+- receiveCurrency
+- transactionDescription
+- transactionType
+- payer
+- payerAccount
+- dateOfBirth [opt] 
+- geoLocationData [opt]
+
+RES
+- payeeDetails
+- receiveAmount
+- receiveCurrency
+- fees
+- feeCurrency
+- exchangeRate
+- expiryDateTime
+
+
+Fields for merchant payments 
+REQ
+- homeTransactionId
+- merchantPaymentId
+- merchantPaymentIdType
+- receiveAmount 
+- receiveCurrency
+- sendCurrency
+- transactionDescription
+- transactionType
+- payer
+- payerAccount
+- dateOfBirth [opt] 
+- geoLocationData [opt]
+
+RES
+- merchantDetails
+- sendAmount
+- sendCurrency
+- fees
+- feeCurrency
+- exchangeRate
+- expiryDateTime
+
