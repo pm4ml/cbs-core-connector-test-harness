@@ -82,16 +82,23 @@
       "additionalApi": true
     },
     {
-      "type": "payer",
+      "type": "payee",
       "version": "1.0",
-      "folderPath": "payer_1.0",
+      "folderPath": "payee_1.0",
       "asynchronous": false,
       "additionalApi": true
     },
     {
-      "type": "payee",
+      "type": "Send Money Api",
       "version": "1.0",
-      "folderPath": "payee_1.0",
+      "folderPath": "Send Money Api_1.0",
+      "asynchronous": false,
+      "additionalApi": true
+    },
+    {
+      "type": "SDK Scheme Adapter API FX",
+      "version": "2.1",
+      "folderPath": "SDK Scheme Adapter API FX_2.1",
       "asynchronous": false,
       "additionalApi": true
     }
