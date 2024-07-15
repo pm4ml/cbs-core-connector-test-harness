@@ -51,7 +51,7 @@ paths:
         content:
           application/json:
             schema: 
-              $ref: "#/components/schemas/transferRequest"
+              $ref: "#/components/schemas/sendMoneyRequest"
       tags:
         - Send Money  
       responses:
@@ -60,6 +60,19 @@ paths:
             Response for send money request. A quote if it is double 
             integration or a payment status response if it is single
             integration
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/sendMoneyResponse"
+        '400':
+          description: >-
+            Response for a bad request.
+        '500':
+          description: >- 
+            Response for an internal server error
+        '504':
+          description: >-
+            Response for a timed out transfer 
   /send-money/{id}:
     put:
       summary: Confirm send money
@@ -81,14 +94,14 @@ paths:
     post:
       summary: Send Money endpoint 
       description: >- 
-        The Endpoint used by the DFSP Operations application to initiate send money 
+        The Endpoint used by the DFSP Operations application to initiate merchant payment
         requests to the mojaloop connector
       requestBody:
         description: Send Money request body
         content:
           application/json:
             schema: 
-              $ref: "#/components/schemas/transferRequest"
+              $ref: "#/components/schemas/merchantPaymentRequest"
       tags:
         - Merchant Payments 
       responses:
@@ -97,6 +110,20 @@ paths:
             Response for send money request. A quote if it is double 
             integration or a payment status response if it is single
             integration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/merchantPaymentResponse"
+
+        '400':
+          description: >- 
+            Response for bad request 
+        '500':
+          description: >- 
+            Internal Server error
+        '504':
+          description: >- 
+            Transfer Timeout.
   
   /merchant-payment/{id}:
     put:
@@ -118,83 +145,184 @@ paths:
 
 components:
   schemas:
-    transferRequest:
+    merchantPaymentRequest:
       type: object
       properties:
         homeTransactionId:
           type: string
-        from:
-          $ref: '#/components/schemas/Party'
-        to:
-          $ref: '#/components/schemas/Party'
-        amountType:
+          example: "HTX123456789"
+        merchantPaymentId:
           type: string
-          enum: [RECEIVE]
-        currency:
+          example: "16135551212"
+        merchantPaymentIdType:
           type: string
-        amount:
+          example: "MSISDN"
+        receiveAmount:
           type: string
+          example: "150.00"
+        receiveCurrency:
+          type: string
+          example: "UGX"
+        sendCurrency:
+          type: string
+          example: "KES"
+        transactionDescription:
+          type: string
+          example: "Payment for services"
         transactionType:
           type: string
-          enum: [TRANSFER]
-        subScenario:
+          example: "TRANSFER"
+        payer:
           type: string
-        note:
+          example: "John Doe"
+        payerAccount:
           type: string
-        quoteRequestExtensions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-        transferRequestExtensions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-        skipPartyLookup:
-          type: boolean
-    Party:
-      type: object
-      properties:
-        type:
-          type: string
-          enum: [CONSUMER]
-        idType:
-          type: string
-          enum: [MSISDN]
-        idValue:
-          type: string
-        idSubValue:
-          type: string
-        displayName:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
+          example: "9876543210"
         dateOfBirth:
           type: string
           format: date
-        merchantClassificationCode:
-          type: string
-        fspId:
-          type: string
-        supportedCurrencies:
-          type: array
-          items:
-            type: string
-        kycInformation:
-          type: string
-        extensionList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Extension'
-    Extension:
+          example: "1985-04-12"
+        geoLocationData:
+          description: >-
+            Indicates the geographic location from where the transaction was
+            initiated.
+          properties:
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+          required:
+            - latitude
+            - longitude
+          type: object
+    latitude:
+      description: >-
+        The API data type Latitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      pattern: >-
+        ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
+      type: string
+    longitude:
+      description: >-
+        The API data type Longitude is a JSON String in a lexical format that is
+        restricted by a regular expression for interoperability reasons.
+      pattern: >-
+        ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
+      type: string
+
+    merchantPaymentResponse:
       type: object
       properties:
-        key:
+        merchantDetails:
           type: string
-        value:
+          example: "{\"name\":\"Jane Smith\",\"accountNumber\":\"1234567890\",\"bankName\":\"Example Bank\",\"address\":\"456 Elm Street, Somecity, Country\"}"
+        sendAmount:
+          type: string
+          example: "140.00"
+        sendCurrency:
+          type: string
+          example: "EUR"
+        fees:
+          type: string
+          example: "10.00"
+        feeCurrency:
+          type: string
+          example: "USD"
+        exchangeRate:
+          type: string
+          example: "1.10"
+        expiryDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T12:00:00Z"
+    sendMoneyResponse:
+      type: object
+      properties:
+        payeeDetails:
+          type: string
+          example: "{\"name\":\"Jane Smith\",\"accountNumber\":\"1234567890\",\"bankName\":\"Example Bank\",\"address\":\"456 Elm Street, Somecity, Country\"}"
+        receiveAmount:
+          type: string
+          example: "140.00"
+        receiveCurrency:
+          type: string
+          example: "EUR"
+        fees:
+          type: string
+          example: "10.00"
+        feeCurrency:
+          type: string
+          example: "USD"
+        exchangeRate:
+          type: string
+          example: "1.10"
+        expiryDateTime:
+          type: string
+          format: date-time
+          example: "2024-08-01T12:00:00Z"
+    sendMoneyRequest:
+      type: object
+      properties:
+        homeTransactionId:
+          type: string
+          example: "HTX123456789"
+        payeeId:
+          type: string
+          example: "16135551212"
+        payeeIdType:
+          type: string
+          example: "MSISDN"
+        sendAmount:
+          type: string
+          example: "150.00"
+        sendCurrency:
+          type: string
+          example: "UGX"
+        receiveCurrency:
+          type: string
+          example: "KES"
+        transactionDescription:
+          type: string
+          example: "Payment for services"
+        transactionType:
+          type: string
+          example: "TRANSFER"
+        payer:
+          type: string
+          example: "John Doe"
+        payerAccount:
+          type: string
+          example: "9876543210"
+        dateOfBirth:
+          type: string
+          format: date
+          example: "1985-04-12"
+        geoLocationData:
+          description: >-
+            Indicates the geographic location from where the transaction was
+            initiated.
+          properties:
+            latitude:
+              $ref: '#/components/schemas/latitude'
+            longitude:
+              $ref: '#/components/schemas/longitude'
+          required:
+            - latitude
+            - longitude
+          type: object
+        latitude:
+          description: >-
+            The API data type Latitude is a JSON String in a lexical format that is
+            restricted by a regular expression for interoperability reasons.
+          pattern: >-
+            ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
+          type: string
+        longitude:
+          description: >-
+            The API data type Longitude is a JSON String in a lexical format that is
+            restricted by a regular expression for interoperability reasons.
+          pattern: >-
+            ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
           type: string
     ConfirmSendMoney:
       type: object
