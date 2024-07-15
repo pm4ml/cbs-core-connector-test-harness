@@ -66,5 +66,11 @@ Here is an architecture to illustrate how all the different apis line up in the 
 
 # Setup
 
+Once you have developed the core connector, it will need to be tested to verify that it responds accordingly to all happy paths and exception cases.
+
+To test your core connector, you will need to package it as a docker image using a [Dockerfile](https://docs.docker.com/reference/dockerfile/)
+
+To build your core connectors image as part of this test harness, you will need to put the core connector code in the src folder x
+
 # Run 
 To run the 
