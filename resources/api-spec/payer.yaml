@@ -76,6 +76,14 @@ paths:
   /send-money/{id}:
     put:
       summary: Confirm send money
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the transaction
+          schema:
+            type: string
+            example: "HTX987654321"
       requestBody:
         required: true
         content:
@@ -128,6 +136,14 @@ paths:
   /merchant-payment/{id}:
     put:
       summary: Confirm send money
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the transaction
+          schema:
+            type: string
+            example: "HTX987654321"
       requestBody:
         required: true
         content:
