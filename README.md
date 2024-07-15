@@ -2,6 +2,12 @@
 A development and testing harness for core connectors that support the P2P cross currency use case in a Mojaloop scheme
 
 
+# Pre-requisites
+Before you go through this test harness documentation, the following are required for you to be able to go through it successfully
+
+- Working knowledge of RESTful APIs
+- Docker 
+
 # Overview 
 This test harness is intended to provide a core connector testing and development framework. The idea of a core connector came about as a result of the need to have an integration middlewear between the Mojaloop Connector (SDK Scheme Adapter) and a Financial Service Provider (FSP) Core Banking System.
 
@@ -70,7 +76,20 @@ Once you have developed the core connector, it will need to be tested to verify 
 
 To test your core connector, you will need to package it as a docker image using a [Dockerfile](https://docs.docker.com/reference/dockerfile/)
 
-To build your core connectors image as part of this test harness, you will need to put the core connector code in the src folder x
+To build your core connectors image as part of this test harness, you will need to put the core connector code in the src folder and run the following command.
 
-# Run 
-To run the 
+```bash
+docker compose up --build
+```
+With the --build flag, docker will rebuild the image of the core connector using the src folder as the build context so it is important that the Dockerfile is at the root of the src folder.
+
+Once all is in place correctly, the test stack will be created.
+
+# Running Tests
+To run the tests, you will need to open the TTK UI in your web browser.
+ TTK is deployed as part of the test harness.
+
+Follow this link to open the TTK Ui. http://localhost:6060
+
+
+# Conclusion
