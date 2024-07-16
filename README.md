@@ -76,20 +76,46 @@ Once you have developed the core connector, it will need to be tested to verify 
 
 To test your core connector, you will need to package it as a docker image using a [Dockerfile](https://docs.docker.com/reference/dockerfile/)
 
-To build your core connectors image as part of this test harness, you will need to put the core connector code in the src folder and run the following command.
+Build your core connector docker image and tag it with the name in the command. You can build like so.
 
 ```bash
-docker compose up --build
+docker build -t cbs-core-connector:local . 
 ```
-With the --build flag, docker will rebuild the image of the core connector using the src folder as the build context so it is important that the Dockerfile is at the root of the src folder.
+When you run the test harness using docker compose, it will be able to pick up the built docker image and run it as part of the test stack.
 
-Once all is in place correctly, the test stack will be created.
+To run the test harness use this command to clone this repository. 
+
+```bash
+git clone https://github.com/mojaloop/CbsCoreConnectorTestHarness.git
+```
+After cloning this repository, navigate into the directory to set up the tests.
+
+```bash
+cd CbsCoreConnectorTestHarness
+```
+
+Run this command to bootstrap the test harness on your local machine.
+
+```bash
+docker compose up 
+```
+You could also choose to run it in detached mode by adding the `-d` option.
+
+```bash
+docker compose up -d
+```
+
+After bootstraping the test harness, you are ready to start running tests against your core connector.
+
 
 # Running Tests
 To run the tests, you will need to open the TTK UI in your web browser.
- TTK is deployed as part of the test harness.
+TTK is deployed as part of the test harness.
 
 Follow this link to open the TTK Ui. http://localhost:6060
+
+
+Once you open this link, you will be brought to this interface as shown in this screenshot
 
 
 # Conclusion
