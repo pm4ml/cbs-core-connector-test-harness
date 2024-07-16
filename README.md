@@ -69,6 +69,9 @@ Here is an architecture to illustrate how all the different apis line up in the 
 
 ![API Overview](./assets//CBS%20Integration%20Diagrams-APIOverview.drawio.png)
 
+When building your core connector, to support testing, please expose the server to listen on port 3003 because it is on this port that requests will be made to validated the test cases.
+
+If you have environment variables for the core connector, place them in a .env file such that when it comes to time for executing test cases, you will overwrite the contents of the .env.example file of this folder with your environment variables. 
 
 # Setup
 
@@ -93,6 +96,8 @@ After cloning this repository, navigate into the directory to set up the tests.
 ```bash
 cd CbsCoreConnectorTestHarness
 ```
+Copy the contents of the environment file you created if any to the .env.example file in this folder
+
 
 Run this command to bootstrap the test harness on your local machine.
 
