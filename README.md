@@ -117,5 +117,20 @@ Follow this link to open the TTK Ui. http://localhost:6060
 
 Once you open this link, you will be brought to this interface as shown in this screenshot
 
+![TTK Landing](./assets/TTKLanding.png)
+Click on Test Runner 
+
+![Test Runner](./assets/TTKTestRunner.png)
+
+In the right hand upper corner click the Run button to execute test cases against your core connector.
+
+![Run tests](./assets/TTRun.png)
+
+After executing the tests, you will see the test results which will show how many tests passed or failed.
 
 # Conclusion
+
+This test harness is intended to support the development and testing of core banking solution core connectors for a mojaloop.
+
+Note that it is important to implement the api schemas correctly because the api schemas are the ones against which test  case assertions will be executed.
+
