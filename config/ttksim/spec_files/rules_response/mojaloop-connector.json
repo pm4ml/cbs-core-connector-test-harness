@@ -1,0 +1,849 @@
+[
+  {
+    "ruleId": 1,
+    "priority": 1,
+    "description": "get /",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {},
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 2,
+    "priority": 1,
+    "description": "get /services/FXP",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/services/FXP"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "providers": [
+            "string"
+          ]
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 3,
+    "priority": 1,
+    "description": "get /parties/{Type}/{ID}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/parties/{Type}/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "party": {
+            "body": {
+              "partyIdInfo": {
+                "partyIdType": "MSISDN",
+                "partyIdentifier": "16135551212",
+                "partySubIdOrType": "string",
+                "fspId": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "merchantClassificationCode": "83",
+              "name": "string",
+              "personalInfo": {
+                "complexName": {
+                  "firstName": "Henrik",
+                  "middleName": "Johannes",
+                  "lastName": "Karlsson"
+                },
+                "dateOfBirth": "1966-06-16",
+                "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+              },
+              "supportedCurrencies": [
+                "AED"
+              ]
+            },
+            "headers": {}
+          },
+          "currentState": "WAITING_FOR_ACTION"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 4,
+    "priority": 1,
+    "description": "get /parties/{Type}/{ID}/{SubId}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/parties/{Type}/{ID}/{SubId}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "party": {
+            "body": {
+              "partyIdInfo": {
+                "partyIdType": "MSISDN",
+                "partyIdentifier": "16135551212",
+                "partySubIdOrType": "string",
+                "fspId": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "merchantClassificationCode": "67",
+              "name": "string",
+              "personalInfo": {
+                "complexName": {
+                  "firstName": "Henrik",
+                  "middleName": "Johannes",
+                  "lastName": "Karlsson"
+                },
+                "dateOfBirth": "1966-06-16",
+                "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+              },
+              "supportedCurrencies": [
+                "AED"
+              ]
+            },
+            "headers": {}
+          },
+          "currentState": "WAITING_FOR_ACTION"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 5,
+    "priority": 1,
+    "description": "post /quotes",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/quotes"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "quotes": {
+            "body": {
+              "transferAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeReceiveAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspFee": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspCommission": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "currentState": "WAITING_FOR_ACTION"
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 6,
+    "priority": 1,
+    "description": "post /transfers",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "homeTransactionId": "string",
+          "from": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "AED"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "to": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "AED"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "amountType": "RECEIVE",
+          "currency": "AED",
+          "amount": "123.45",
+          "transactionType": "TRANSFER",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "note": "Note sent to Payee.",
+          "currentState": "ERROR_OCCURRED",
+          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "getPartiesResponse": {
+            "body": {},
+            "headers": {}
+          },
+          "quoteResponse": {
+            "body": {
+              "transferAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeReceiveAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspFee": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspCommission": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponseSource": "string",
+          "conversionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "fxQuotesResponse": {
+            "body": {
+              "homeTransactionId": "string",
+              "condition": "string",
+              "conversionTerms": {
+                "conversionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "initiatingFsp": "string",
+                "counterPartyFsp": "string",
+                "amountType": "RECEIVE",
+                "sourceAmount": {
+                  "currency": "AED",
+                  "amount": "123.45"
+                },
+                "targetAmount": {
+                  "currency": "AED",
+                  "amount": "123.45"
+                },
+                "expiration": "2016-05-24T08:38:08.699-04:00",
+                "charges": [
+                  {
+                    "chargeType": "string",
+                    "sourceAmount": {
+                      "currency": "AED",
+                      "amount": "123.45"
+                    },
+                    "targetAmount": {
+                      "currency": "AED",
+                      "amount": "123.45"
+                    }
+                  }
+                ],
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "fxQuotesResponseSource": "string",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+              "errorInformation": {
+                "errorCode": "5100",
+                "errorDescription": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "skipPartyLookup": true
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 7,
+    "priority": 1,
+    "description": "put /transfers/{transferId}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers/{transferId}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "homeTransactionId": "string",
+          "from": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "AED"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "to": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "AED"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "amountType": "RECEIVE",
+          "currency": "AED",
+          "amount": "123.45",
+          "transactionType": "TRANSFER",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "note": "Note sent to Payee.",
+          "currentState": "ERROR_OCCURRED",
+          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "getPartiesResponse": {
+            "body": {},
+            "headers": {}
+          },
+          "quoteResponse": {
+            "body": {
+              "transferAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeReceiveAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspFee": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspCommission": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponseSource": "string",
+          "conversionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "fxQuotesResponse": {
+            "body": {
+              "homeTransactionId": "string",
+              "condition": "string",
+              "conversionTerms": {
+                "conversionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "initiatingFsp": "string",
+                "counterPartyFsp": "string",
+                "amountType": "RECEIVE",
+                "sourceAmount": {
+                  "currency": "AED",
+                  "amount": "123.45"
+                },
+                "targetAmount": {
+                  "currency": "AED",
+                  "amount": "123.45"
+                },
+                "expiration": "2016-05-24T08:38:08.699-04:00",
+                "charges": [
+                  {
+                    "chargeType": "string",
+                    "sourceAmount": {
+                      "currency": "AED",
+                      "amount": "123.45"
+                    },
+                    "targetAmount": {
+                      "currency": "AED",
+                      "amount": "123.45"
+                    }
+                  }
+                ],
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "fxQuotesResponseSource": "string",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+              "errorInformation": {
+                "errorCode": "5100",
+                "errorDescription": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "skipPartyLookup": true
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 8,
+    "priority": 1,
+    "description": "get /transfers/{transferId}",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-out-v2-1",
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers/{transferId}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "currentState": "ERROR_OCCURRED",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          }
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  }
+]

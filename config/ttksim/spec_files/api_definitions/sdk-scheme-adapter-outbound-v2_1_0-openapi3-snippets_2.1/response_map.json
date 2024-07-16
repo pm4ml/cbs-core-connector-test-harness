@@ -1,0 +1,28 @@
+{
+    "/transfers/{transferId}": {
+    "get": {
+      "response": {
+        "bodyOverride": {
+            "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+            "currentState": "ERROR_OCCURRED",
+            "fulfil": {
+              "body": {
+                "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+                "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+                "transferState": "RESERVED",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "headers": {}
+            }
+          }
+      }
+    }
+  }
+}

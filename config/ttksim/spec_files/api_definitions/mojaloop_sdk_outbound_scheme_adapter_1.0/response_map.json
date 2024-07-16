@@ -21,20 +21,15 @@
   "/transfers": {
     "post": {
       "response": {
-        "bodyOverride": {
-          "homeTransactionId": "{$request.body.homeTransactionId}"
-        }
+        "bodyOverride": {}
       }
     }
   },
   "/transfers/{transferId}": {
     "put": {
       "response": {
-        "bodyOverride": {
-          "acceptQuote": "{$request.body.acceptQuote}"
-        }
+        "bodyOverride": {}
       }
     }
   }
 }
-

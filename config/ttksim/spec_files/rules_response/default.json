@@ -1,27 +1,22 @@
 [
   {
-    "ruleId": 23,
+    "type": "response",
+    "version": 1,
+    "ruleId": 1,
     "priority": 1,
-    "description": "post /transfers",
+    "description": "post /settlementWindows/{id}",
     "apiVersion": {
       "minorVersion": 0,
       "majorVersion": 1,
-      "type": "scheme_adapter_outbound",
-      "asynchronous": true,
-      "prefix": "/sdk-out",
-      "hostnames": [],
-      "specFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/api_spec.yaml",
-      "callbackMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/callback_map.json",
-      "responseMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/response_map.json",
-      "jsfRefFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/mockRef.json",
-      "triggerTemplatesFolder": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/trigger_templates"
+      "type": "settlements",
+      "asynchronous": false
     },
     "conditions": {
       "all": [
         {
           "fact": "operationPath",
           "operator": "equal",
-          "value": "/transfers"
+          "value": "/settlementWindows/{id}"
         },
         {
           "fact": "method",
@@ -35,136 +30,37 @@
       "path": null,
       "params": {
         "body": {
-          "from": {
-            "type": "CONSUMER",
-            "idType": "{$request.body.from.idType}",
-            "idValue": "{$request.body.from.idValue}",
-            "idSubValue": null,
-            "displayName": "Henrik Karlsson",
-            "firstName": "Henrik",
-            "middleName": "Johannes",
-            "lastName": "Karlsson",
-            "dateOfBirth": "1966-06-16",
-            "fspId": "senderfsp",
-            "merchantClassificationCode": null,
-            "extensionList": null
-          },
-          "to": {
-            "type": "CONSUMER",
-            "idType": "{$request.body.to.idType}",
-            "idValue": "{$request.body.to.idType}",
-            "idSubValue": null,
-            "displayName": "Gloria Gervitz",
-            "firstName": "Gloria",
-            "middleName": "J",
-            "lastName": "Gervitz",
-            "dateOfBirth": "1966-06-16",
-            "fspId": "recieverfsp",
-            "merchantClassificationCode": null,
-            "extensionList": null
-          },
-          "amountType": "{$request.body.amountType}",
-          "currency": "{$request.body.currency}",
-          "amount": "{$request.body.amount}",
-          "transactionType": "{$request.body.transactionType}",
-          "subScenario": null,
-          "note": "{$request.body.note}",
-          "currentState": "COMPLETED",
-          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-          "getPartiesResponse": {
-            "body": {},
-            "headers": {}
-          },
-          "quoteResponse": {
-            "body": {
-              "transferAmount": {
-                "currency": "{$request.body.currency}",
-                "amount": "{$environment.quoteTransferAmount}"
-              },
-              "payeeReceiveAmount": {
-                "currency": "{$request.body.currency}",
-                "amount": "{$environment.quotePayeeReceiveAmount}"
-              },
-              "payeeFspFee": {
-                "currency": "{$request.body.currency}",
-                "amount": "{$environment.quotePayeeFspFee}"
-              },
-              "payeeFspCommission": {
-                "currency": "{$request.body.currency}",
-                "amount": "{$environment.quotePayeeFspCommission}"
-              },
-              "expiration": "2016-05-24T08:38:08.699-04:00",
-              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
-              "condition": "string",
-              "geoCode": null,
-              "extensionList": null
-            },
-            "headers": {}
-          },
-          "quoteResponseSource": "string",
-          "fulfil": null,
-          "lastError": null,
-          "skipPartyLookup": true
+          "state": "OPEN"
         },
-        "statusCode": "200",
-        "scripts": {
-          "exec": [
-            "",
-            "const quoteBody = JSON.parse(request.body)",
-            "",
-            "const feePercent = 5",
-            "const commissionPercent = 2",
-            "const fee = Math.round(Number(quoteBody.amount) *  feePercent / 100)",
-            "const commission = Math.round(Number(quoteBody.amount) *  commissionPercent / 100)",
-            "",
-            "environment.quoteTransferAmount = quoteBody.amount",
-            "environment.quotePayeeFspFee = fee",
-            "environment.quotePayeeFspCommission = commission",
-            "environment.quotePayeeReceiveAmount = quoteBody.amount",
-            "if (quoteBody.amountType === 'RECEIVE') {",
-            "  environment.quoteTransferAmount = (+quoteBody.amount) + fee - commission",
-            "}",
-            "if (quoteBody.amountType === 'SEND') {",
-            "  environment.quotePayeeReceiveAmount = (+quoteBody.amount) - fee + commission",
-            "}",
-            "environment.quoteExpiration =new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString()"
-          ],
-          "scriptingEngine": "javascript"
-        }
+        "statusCode": "200"
       },
+      "delay": 0,
       "type": "MOCK_RESPONSE"
-    },
-    "type": "response",
-    "version": 1
+    }
   },
   {
-    "ruleId": 24,
+    "type": "response",
+    "version": 1,
+    "ruleId": 3,
     "priority": 1,
-    "description": "put /transfers/{transferId}",
+    "description": "post /settlements",
     "apiVersion": {
       "minorVersion": 0,
       "majorVersion": 1,
-      "type": "scheme_adapter_outbound",
-      "asynchronous": true,
-      "prefix": "/sdk-out",
-      "hostnames": [],
-      "specFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/api_spec.yaml",
-      "callbackMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/callback_map.json",
-      "responseMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/response_map.json",
-      "jsfRefFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/mockRef.json",
-      "triggerTemplatesFolder": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/trigger_templates"
+      "type": "settlements",
+      "asynchronous": false
     },
     "conditions": {
       "all": [
         {
           "fact": "operationPath",
           "operator": "equal",
-          "value": "/transfers/{transferId}"
+          "value": "/settlements"
         },
         {
           "fact": "method",
           "operator": "equal",
-          "value": "put"
+          "value": "post"
         }
       ]
     },
@@ -173,97 +69,60 @@
       "path": null,
       "params": {
         "body": {
-          "transferId": "{$request.params.transferId}",
-          "from": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "123456789",
-            "idSubValue": null,
-            "displayName": "Henrik Karlsson",
-            "firstName": "Henrik",
-            "middleName": "Johannes",
-            "lastName": "Karlsson",
-            "dateOfBirth": "1966-06-16",
-            "fspId": "senderfsp",
-            "merchantClassificationCode": null,
-            "extensionList": null
-          },
-          "to": {
-            "type": "CONSUMER",
-            "idType": "MSISDN",
-            "idValue": "987654321",
-            "idSubValue": null,
-            "displayName": "Gloria Gervitz",
-            "firstName": "Gloria",
-            "middleName": "J",
-            "lastName": "Gervitz",
-            "dateOfBirth": "1966-06-16",
-            "fspId": "recieverfsp",
-            "merchantClassificationCode": null,
-            "extensionList": null
-          },
-          "amountType": "SEND",
-          "currency": "MXN",
-          "amount": "1800",
-          "transactionType": "RECEIVE",
-          "subScenario": null,
-          "note": "asdf",
-          "currentState": "COMPLETED",
-          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
-          "getPartiesResponse": {
-            "body": {},
-            "headers": {}
-          },
-          "quoteResponse": {
-            "body": null,
-            "headers": null
-          },
-          "quoteResponseSource": "string",
-          "fulfil": {
-            "body": {
-              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
-              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
-              "transferState": "COMMITTED",
-              "extensionList": null
-            },
-            "headers": {}
-          },
-          "lastError": null,
-          "skipPartyLookup": true
+          "id": "123",
+          "state": "PENDING_SETTLEMENT",
+          "settlementWindows": [
+            [
+              {
+                "id": 123,
+                "createdDate": "1954-11-03",
+                "state": "PENDING_SETTLEMENT",
+                "reason": "do",
+                "changedDate": "1954-11-03"
+              }
+            ]
+          ],
+          "participants": [
+            {
+              "id": -91450113,
+              "accounts": [
+                {
+                  "id": 81795155,
+                  "reason": "veniam est proident commodo aliqua",
+                  "state": "PENDING_SETTLEMENT",
+                  "netSettlementAmount": {
+                    "amount": 100,
+                    "currency": "USD"
+                  }
+                }
+              ]
+            }
+          ]
         },
-        "statusCode": "200",
-        "scripts": {
-          "scriptingEngine": "postman"
-        }
+        "statusCode": "200"
       },
-      "type": "MOCK_RESPONSE"
-    },
-    "type": "response",
-    "version": 1
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    }
   },
   {
-    "ruleId": 25,
+    "type": "response",
+    "version": 1,
+    "ruleId": 4,
     "priority": 1,
-    "description": "get /parties/{Type}/{ID}",
+    "description": "get /settlements/{id}",
     "apiVersion": {
       "minorVersion": 0,
       "majorVersion": 1,
-      "type": "scheme_adapter_outbound",
-      "asynchronous": true,
-      "prefix": "/sdk-out",
-      "hostnames": [],
-      "specFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/api_spec.yaml",
-      "callbackMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/callback_map.json",
-      "responseMapFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/response_map.json",
-      "jsfRefFile": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/mockRef.json",
-      "triggerTemplatesFolder": "spec_files/api_definitions/mojaloop_sdk_outbound_scheme_adapter_1.0/trigger_templates"
+      "type": "settlements",
+      "asynchronous": false
     },
     "conditions": {
       "all": [
         {
           "fact": "operationPath",
           "operator": "equal",
-          "value": "/parties/{Type}/{ID}"
+          "value": "/settlements/{id}"
         },
         {
           "fact": "method",
@@ -277,21 +136,158 @@
       "path": null,
       "params": {
         "body": {
-          "idType": "MSISDN",
-          "idValue": "{$request.params.ID}",
-          "displayName": "ReceiverFirst ReceiverLast",
-          "firstName": "ReceiverFirst",
-          "middleName": "ReceiverMiddle",
-          "lastName": "ReceiverLast",
-          "dateOfBirth": "1984-01-01",
-          "fspId": "ttkpm4mlreceiver"
+          "id": "{$request.params.id}",
+          "state": "PS_TRANSFERS_RECORDED",
+          "settlementWindows": [
+            [
+              {
+                "createdDate": "2020-02-10",
+                "id": "{$request.params.id}",
+                "state": "PS_TRANSFERS_RECORDED",
+                "reason": "amet cillum culpa v",
+                "changedDate": "2020-02-10"
+              }
+            ]
+          ],
+          "participants": [
+            {
+              "id": -35933071,
+              "accounts": [
+                {
+                  "id": -14386227,
+                  "reason": "aliquip aliqua nulla deserunt",
+                  "state": "PS_TRANSFERS_RECORDED",
+                  "netSettlementAmount": {
+                    "amount": 100,
+                    "currency": "USD"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "statusCode": "200"
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    }
+  },
+  {
+    "type": "response",
+    "version": 1,
+    "ruleId": 5,
+    "priority": 1,
+    "description": "get /settlementWindows",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "settlements",
+      "asynchronous": false
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/settlementWindows"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "get"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": [
+          {
+            "createdDate": "2020-02-10",
+            "id": 123,
+            "state": "{$request.query.state}",
+            "reason": "string",
+            "changedDate": "2020-02-10"
+          }
+        ],
+        "statusCode": "200"
+      },
+      "delay": 0,
+      "type": "FIXED_RESPONSE"
+    }
+  },
+  {
+    "ruleId": 6,
+    "priority": 1,
+    "description": "post /sdk-backend/fxQuotes",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+      "asynchronous": false,
+      "prefix": "/sdk-backend",
+      "additionalApi": true,
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/fxQuotes"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "conversionTerms": {
+            "conversionId": "581f68ef-b54f-416f-9161-ac34e889a84b",
+            "initiatingFsp": "PayerFSP",
+            "counterPartyFsp": "FDH_FX",
+            "amountType": "SEND",
+            "sourceAmount": {
+              "currency": "BWP",
+              "amount": "300"
+            },
+            "targetAmount": {
+              "currency": "TZS",
+              "amount": "48000"
+            },
+            "expiration": "2021-08-25T14:17:09.663+01:00",
+            "charges": [
+              {
+                "chargeType": "string",
+                "sourceAmount": {
+                  "currency": "BWP",
+                  "amount": "33"
+                },
+                "targetAmount": {
+                  "currency": "TZS",
+                  "amount": "6000"
+                }
+              }
+            ]
+          }
         },
         "statusCode": "200",
         "scripts": {
           "scriptingEngine": "postman"
         }
       },
-      "type": "FIXED_RESPONSE"
+      "type": "MOCK_RESPONSE"
     },
     "type": "response",
     "version": 1

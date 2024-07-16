@@ -73,6 +73,16 @@ When building your core connector, to support testing, please expose the server 
 
 If you have environment variables for the core connector, place them in a .env file such that when it comes to time for executing test cases, you will overwrite the contents of the .env.example file of this folder with your environment variables. 
 
+
+When developing your core connector, make all requests to this base url for the mojaloop connector outbound payments api
+
+```bash
+http://localhost:4040/sdk-out-v2-1/
+```
+Use it as the base url for all paths detailed in the api schema for outgoing payments payee api.
+
+You can set it as an environment variable and access it within your core connector source code. 
+
 # Setup
 
 Once you have developed the core connector, it will need to be tested to verify that it responds accordingly to all happy paths and exception cases.
