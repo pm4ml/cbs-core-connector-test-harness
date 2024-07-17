@@ -1,6 +1,465 @@
 {
-    "options": {},
-    "name": "core-connector-tests",
-    "test_cases": [
-    ]
-  }
+  "options": {},
+  "name": "core-connector-tests",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Outgoing Payments",
+      "fileInfo": {
+        "path": "core-connector-tests.json"
+      },
+      "meta": {
+        "info": "Outgoing Payments"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "Send Money Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payer",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payer_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payer_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payer_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payer_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payer_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "url": "http://coreConnectorUnderTest:3004",
+          "body": {
+            "homeTransactionId": "HTX123456789",
+            "payeeId": "16135551212",
+            "payeeIdType": "MSISDN",
+            "sendAmount": "150.00",
+            "sendCurrency": "UGX",
+            "receiveCurrency": "KES",
+            "transactionDescription": "Payment for services",
+            "transactionType": "TRANSFER",
+            "payer": "John Doe",
+            "payerAccount": "9876543210",
+            "dateOfBirth": "1985-04-12",
+            "geoLocationData": {
+              "latitude": "string",
+              "longitude": "string"
+            },
+            "latitude": "string",
+            "longitude": "string"
+          }
+        },
+        {
+          "id": 2,
+          "description": "Confirm Send Money Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payer",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payer_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payer_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payer_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payer_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payer_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money/{id}",
+          "path": "/send-money/{id}",
+          "method": "put",
+          "params": {
+            "id": ""
+          },
+          "url": "http://coreConnectorUnderTest:3004",
+          "body": {
+            "acceptQuote": true
+          }
+        },
+        {
+          "id": 3,
+          "description": "Merchant Payment Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payer",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payer_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payer_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payer_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payer_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payer_1.0/trigger_templates"
+          },
+          "operationPath": "/merchant-payment",
+          "path": "/merchant-payment",
+          "method": "post",
+          "body": {
+            "homeTransactionId": "HTX123456789",
+            "merchantPaymentId": "16135551212",
+            "merchantPaymentIdType": "MSISDN",
+            "receiveAmount": "150.00",
+            "receiveCurrency": "UGX",
+            "sendCurrency": "KES",
+            "transactionDescription": "Payment for services",
+            "transactionType": "TRANSFER",
+            "payer": "John Doe",
+            "payerAccount": "9876543210",
+            "dateOfBirth": "1985-04-12",
+            "geoLocationData": {
+              "latitude": "string",
+              "longitude": "string"
+            }
+          },
+          "url": "http://coreConnectorUnderTest:3004"
+        },
+        {
+          "id": 4,
+          "description": "Confirm Merchant Payment Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payer",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payer_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payer_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payer_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payer_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payer_1.0/trigger_templates"
+          },
+          "operationPath": "/merchant-payment/{id}",
+          "path": "/merchant-payment/{id}",
+          "method": "put",
+          "params": {
+            "id": ""
+          },
+          "url": "http://coreConnectorUnderTest:3004",
+          "body": {
+            "acceptQuote": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Incoming Payments",
+      "fileInfo": {
+        "path": "core-connector-tests.json"
+      },
+      "meta": {
+        "info": "Incoming Payments"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "Get Parties Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payee",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payee_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payee_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payee_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payee_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payee_1.0/trigger_templates"
+          },
+          "operationPath": "/parties/{idType}/{idValue}",
+          "path": "/parties/{idType}/{idValue}",
+          "method": "get",
+          "params": {
+            "idType": "",
+            "idValue": ""
+          }
+        },
+        {
+          "id": 2,
+          "description": "Quote Request Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payee",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payee_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payee_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payee_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payee_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payee_1.0/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "body": {
+            "homeR2PTransactionId": "string",
+            "amount": "string",
+            "amountType": "SEND",
+            "currency": "AED",
+            "expiration": "string",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "feesAmount": "string",
+            "feesCurrency": "AED",
+            "from": {
+              "dateOfBirth": "string",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "CONSUMER",
+              "supportedCurrencies": [
+                "AED"
+              ],
+              "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+            },
+            "geoCode": {
+              "latitude": "string",
+              "longitude": "string"
+            },
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER",
+            "note": "string",
+            "quoteId": "string",
+            "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+            "to": {
+              "dateOfBirth": "string",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "CONSUMER",
+              "supportedCurrencies": [
+                "AED"
+              ],
+              "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+            },
+            "transactionId": "string",
+            "transactionType": "TRANSFER",
+            "transactionRequestId": "string",
+            "converter": "PAYER",
+            "currencyConversion": {
+              "sourceAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "targetAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              }
+            }
+          }
+        },
+        {
+          "id": 3,
+          "description": "Transfer Request Happy Path",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "payee",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/payee_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/payee_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/payee_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/payee_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/payee_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers",
+          "path": "/transfers",
+          "method": "post",
+          "body": {
+            "homeR2PTransactionId": "string",
+            "amount": "string",
+            "amountType": "SEND",
+            "currency": "AED",
+            "from": {
+              "dateOfBirth": "string",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "CONSUMER",
+              "supportedCurrencies": [
+                "AED"
+              ],
+              "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+            },
+            "ilpPacket": {
+              "data": {
+                "amount": {
+                  "amount": "string",
+                  "currency": "AED"
+                },
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "16135551212",
+                    "partySubIdOrType": "string",
+                    "fspId": "string",
+                    "extensionList": {
+                      "extension": [
+                        {
+                          "key": "string",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "merchantClassificationCode": "string",
+                  "name": "string",
+                  "personalInfo": {
+                    "complexName": {
+                      "firstName": "Henrik",
+                      "middleName": "Johannes",
+                      "lastName": "Karlsson"
+                    },
+                    "dateOfBirth": "1966-06-16",
+                    "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+                  },
+                  "supportedCurrencies": [
+                    "AED"
+                  ]
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "16135551212",
+                    "partySubIdOrType": "string",
+                    "fspId": "string",
+                    "extensionList": {
+                      "extension": [
+                        {
+                          "key": "string",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "merchantClassificationCode": "string",
+                  "name": "string",
+                  "personalInfo": {
+                    "complexName": {
+                      "firstName": "Henrik",
+                      "middleName": "Johannes",
+                      "lastName": "Karlsson"
+                    },
+                    "dateOfBirth": "1966-06-16",
+                    "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+                  },
+                  "supportedCurrencies": [
+                    "AED"
+                  ]
+                },
+                "quoteId": "string",
+                "transactionId": "string",
+                "transactionType": {
+                  "initiator": "PAYER",
+                  "initiatorType": "CONSUMER",
+                  "scenario": "TRANSFER",
+                  "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
+                }
+              }
+            },
+            "note": "string",
+            "quote": {
+              "expiration": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "geoCode": {
+                "latitude": "string",
+                "longitude": "string"
+              },
+              "payeeFspCommissionAmount": "string",
+              "payeeFspCommissionAmountCurrency": "AED",
+              "payeeFspFeeAmount": "string",
+              "payeeFspFeeAmountCurrency": "AED",
+              "payeeReceiveAmount": "string",
+              "payeeReceiveAmountCurrency": "AED",
+              "quoteId": "string",
+              "transactionId": "string",
+              "transferAmount": "string",
+              "transferAmountCurrency": "AED"
+            },
+            "quoteRequestExtensions": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+            "to": {
+              "dateOfBirth": "string",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "CONSUMER",
+              "supportedCurrencies": [
+                "AED"
+              ],
+              "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+            },
+            "transactionType": "TRANSFER",
+            "transferId": "string",
+            "transactionRequestId": "string"
+          }
+        }
+      ]
+    }
+  ]
+}
