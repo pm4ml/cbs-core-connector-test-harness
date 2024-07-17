@@ -152,6 +152,13 @@
       "folderPath": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1",
       "asynchronous": false,
       "prefix": "/sdk-out-v2-1"
+    },
+    {
+      "type": "payer",
+      "version": "1.0",
+      "folderPath": "payer_1.0",
+      "asynchronous": false,
+      "additionalApi": true
     }
   ],
   "SOCKET_IO_ENGINE_OPTIONS": {

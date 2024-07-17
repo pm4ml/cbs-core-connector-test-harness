@@ -13,7 +13,7 @@ services:
       - mojaloop-net
     env_file: .env.example
     ports:
-      - "3003:3003" # replace with your open ports
+      - "3003:3003" 
       - "3004:3004" 
 
   TtkBackend:

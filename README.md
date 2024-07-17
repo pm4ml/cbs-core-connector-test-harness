@@ -26,7 +26,7 @@ The core connector is supposed to implement and expose two apis for it to be abl
 
 # Incoming Payments - Payee
 
-Below is an architecture diagram that shows how a core connector supports payee receipt of funds from a mojaloop scheme.
+Below is an architecture diagram that shows how a core connector supports payee receipt of funds from a mojaloop scheme in this test harness.
 
 ![Payee Architecture](./assets/CBS%20Integration%20Diagrams-Payee%20Architectural%20Flow.drawio.png)
 
@@ -34,7 +34,11 @@ In this architecture the core connector is shown as a stateless synchronous api 
 
 The Mojaloop connector and the switch are simulated using TTK. To support incoming transactions, the core connector should implement the backend api for the Mojaloop connector.
 
-Please find the api schema for the mojaloop connector backend api at the this location
+There is also a core banking solution sandbox which represents a financial service provider's core banking solution UAT environment.
+
+When executing test cases on your core connector, for different test cases it is important that a quality assurance personal observes the changing state of account balances to validate that the core connector is indeed functioning as intended for both happy path and non happy paths.
+
+Please find the api schema for the mojaloop connector backend api at this location. The core connector needs to expose an api that will be invoked by the sdk scheme adapter api to receive payments from the mojaloop scheme. The api needs to be in sync with the api definition in this api definition.
 
 ```bash
 ./resources/api-spec/payee.yaml
@@ -42,12 +46,12 @@ Please find the api schema for the mojaloop connector backend api at the this lo
 
 Here is a [link](./resources/api-spec/payee.yaml) to the api schema file
 
-When an inbound payment is received by the  mojaloop connector, it will make requests to your core connector to perform account lookup, quoting and effecting transfers.
+When an inbound payment is received by the  mojaloop connector, it will make requests to your core connector to perform account lookup, quoting and transfers.
 
 The core connector needs to respond to the api calls described in the open api specification for payee.
 
 # Outgoing Payments - Payer
-Here is another illustration that shows how the core connector should be used to support out going payments i.e Payments that are initiated fron your financial service provider's customers.
+Here is another illustration that shows how the core connector should be used to support out going payments i.e Payments that are initiated from your customers.
 
 ![](./assets/CBS%20Integration%20Diagrams-Payer%20Architectural%20Flow.drawio.png)
 
@@ -55,30 +59,44 @@ In this architecture, the core connector is shown as a stateless synchronous api
 
 To initiate payments to a beneficiary whose account is held in another financial service provider, the core connector would need to make requests to the outbound api of the mojaloop connector.
 
+As you develop your connector, it is important that your core connector conforms to this scheme to inititate payment requests through the mojaloop connector.
+
 Please find the api schema for the mojaloop connector outgoing api at the this location
+
+```bash
+./resources/api-spec/ml-connector-bound.yml
+```
+
+Here is a [link](/resources/api-spec/ml-connector-bound.yml) to the api schema file
+
+We have also designed a send money RESTful api which your core banking solution can use to send transfer requests to your core connector. 
+
+This send money api is supposed to be implemented by your core connector and exposed as a server on a port so that your core banking solution can use it to initiate send money requests as well as merchant payment requets.
+
+Please find the send money api schema at this location
 
 ```bash
 ./resources/api-spec/payer.yaml
 ```
 
-Here is a [link](./resources/api-spec/payer.yaml) to the api schema file
-
-To have a fully functioning core connector, it needs to implement both apis for handling incoming payments and initiating outgoing payments.
-
+Here is a [link](/resources/api-spec/payer.yaml) to the api schema file
 Here is an architecture to illustrate how all the different apis line up in the integration setup.
 
 ![API Overview](./assets//CBS%20Integration%20Diagrams-APIOverview.drawio.png)
 
-When building your core connector, to support testing, please expose the server to listen on port 3003 because it is on this port that requests will be made to validated the test cases.
 
-If you have environment variables for the core connector, place them in a .env file such that when it comes to time for executing test cases, you will overwrite the contents of the .env.example file of this folder with your environment variables. 
+# Core Connector Networking
+
+The core connector needs to expose services on two ports, one port listening for requests from your core banking solution and the other listening for requests from the mojaloop connector
 
 
-When developing your core connector, make all requests to this base url for the mojaloop connector outbound payments api
+To support testing, the core connector should expose these two ports.
 
-```bash
-http://localhost:4040/sdk-out-v2-1/
-```
+- `3003` for receiving requests from the Mojaloop connector
+- `3004` for receiving requests from your Core banking solution
+
+When developing and testing your core connector, make all requests to this base url http://localhost:4040/sdk-out-v2-1/  to initiate outbound payments through the mojaloop connector's outbound api
+
 Use it as the base url for all paths detailed in the api schema for outgoing payments payee api.
 
 You can set it as an environment variable and access it within your core connector source code. 
