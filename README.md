@@ -95,7 +95,9 @@ To support testing, the core connector should expose these two ports.
 - `3003` for receiving requests from the Mojaloop connector
 - `3004` for receiving requests from your Core banking solution
 
-When developing and testing your core connector, make all requests to this base url http://localhost:4040/sdk-out-v2-1/  to initiate outbound payments through the mojaloop connector's outbound api
+When developing and testing your core connector, make all requests to this base url http://localhost:4040/sdk-out-v2-1/  after running the test harness to initiate outbound payments through the mojaloop connector's outbound api
+
+Refer to the [Setup](#setup) section to learn more about how to run the test harness.
 
 Use it as the base url for all paths detailed in the api schema for outgoing payments payee api.
 
