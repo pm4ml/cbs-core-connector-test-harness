@@ -7,9 +7,59 @@ Before you go through this test harness documentation, the following are require
 
 - Working knowledge of RESTful APIs
 - Docker 
+- Git
 
 # Overview 
 This test harness is intended to provide a core connector testing and development framework. The idea of a core connector came about as a result of the need to have an integration middlewear between the Mojaloop Connector (SDK Scheme Adapter) and a Financial Service Provider (FSP) Core Banking System.
+
+# Getting Started
+
+To run this test stack run the following commands
+
+> By default this runs with the Mifos Core Connector
+
+Clone this repository using git.
+
+```bash
+git clone https://github.com/mojaloop/cbs-core-connector-test-harness.git
+```
+
+Navigate into the directory using this command 
+
+```bash
+cd cbs-core-connector-test-harness
+```
+
+Run this command to bootstrap the test harness.
+
+
+```bash
+docker compose up
+```
+
+Or in detachced mode
+
+```bash
+docker compose up -d
+```
+
+At this point you have run the test harness using the Mifos Core Connector as the core connector under test. This is because by default it is the core connector configured. More info on how to develop and configure your own core connector in the coming sections.
+
+Open the TTK UI using this url http://localhost:6060
+
+Once you open this link, you will be brought to this interface as shown in this screenshot
+
+![TTK Landing](./assets/TTKLanding.png)
+Click on Test Runner 
+
+![Test Runner](./assets/TTKTestRunner.png)
+
+In the right hand upper corner click the Run button to execute test cases against the mifos core connector.
+
+![Run tests](./assets/TTRun.png)
+
+After executing the tests, you will see the test results which will show how many tests passed or failed by the core connector under test.
+
 
 # Developing a Core Connector
 To develop a core connector, it is important to understand the different apis that the core connector needs to expose and those it needs to consume to support receipt and initiation of payments in a Mojaloop scheme.
@@ -103,7 +153,9 @@ Use it as the base url for all paths detailed in the api schema for outgoing pay
 
 You can set it as an environment variable and access it within your core connector source code. 
 
-# Setup
+A reference core connector has been built for the open source
+
+# Testing a custom core connector
 
 Once you have developed the core connector, it will need to be tested to verify that it responds accordingly to all happy paths and exception cases.
 
