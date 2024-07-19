@@ -153,46 +153,162 @@ Use it as the base url for all paths detailed in the api schema for outgoing pay
 
 You can set it as an environment variable and access it within your core connector source code. 
 
-A reference core connector has been built for the open source
+# The Mifos Core Connector
+A reference core connector has been built for the open source core banking system called Apache Fineract built by [The Mifos Initiative](https://mifos.org) and maintained by [Apache Software Foundation](https://www.apache.org/)
 
-# Testing a custom core connector
+For benchmarking purposes, you can refer to the [Mifos Core Connector](https://github.com/mojaloop/mifos-core-connector?tab=readme-ov-file#mifos-core-connector) to draw inspiration for your custom core connector.
 
-Once you have developed the core connector, it will need to be tested to verify that it responds accordingly to all happy paths and exception cases.
+
+
+# Testing your Core Connector
+
+Once you have developed the core connector, it will need to be tested to verify that it works as expected.
 
 To test your core connector, you will need to package it as a docker image using a [Dockerfile](https://docs.docker.com/reference/dockerfile/)
 
-Build your core connector docker image and tag it with the name in the command. You can build like so.
+Here is an example Dockerfile that you can adapt to your specific core connector. It is the Dockerfile used in the mifos core connector to build a docker image.
+
+```Dockerfile
+## *Builder*
+FROM node:lts-alpine as builder
+
+RUN apk add --no-cache git python3 build-base
+
+## Create app directory
+WORKDIR /opt/app
+
+## Copy basic files for installing dependencies
+COPY tsconfig.json package.json package-lock.json /opt/app/
+COPY src /opt/app/src
+
+RUN npm ci
+
+## Build the app
+RUN npm run build
+
+
+## *Application*
+FROM node:lts-alpine
+
+RUN apk add --no-cache git python3 g++ make
+WORKDIR /opt/app
+
+COPY package.json package-lock.json* /opt/app/
+
+RUN npm ci --production
+
+## Copy of dist directory from builder
+COPY --from=builder /opt/app/dist/ ./dist/
+COPY --from=builder /opt/app/src/api-spec ./src/api-spec
+
+## Expose any application ports
+# EXPOSE <PORT>
+
+CMD [ "npm" , "start" ]
+```
+
+To build a docker image for your newly built core connector. You will need to add a Dockerfile to your project source code if you already haven't 
+
+Consider this directory structure of a hypothetical core connector
+
+```bash
+core_connector
+├── src
+├── tests
+├── tsconfig.json
+└── package.json
+
+```
+You need to add a Dockerfile to the root of your folder and it should now look like this.
+
+```bash
+core_connector
+├── src
+├── tests
+├── tsconfig.json
+├── package.json
+└── Dockerfile
+
+```
+Once you have added a Dockerfile to your core connector. You can build an image for it like this. You can tag it with a name of choice using the `-t` option. 
 
 ```bash
 docker build -t cbs-core-connector:local . 
 ```
-When you run the test harness using docker compose, it will be able to pick up the built docker image and run it as part of the test stack.
 
-To run the test harness use this command to clone this repository. 
-
-```bash
-git clone https://github.com/mojaloop/CbsCoreConnectorTestHarness.git
-```
-After cloning this repository, navigate into the directory to set up the tests.
+After building the image, you will need to configure it into the docker-compose.yaml of this test harness. Here is the link to the [docker-compose.yaml](./docker-compose.yaml)
 
 ```bash
-cd CbsCoreConnectorTestHarness
+./docker-compose.yaml
 ```
-Copy the contents of the environment file you created if any to the .env.example file in this folder
 
+Open the docker-compose.yaml in an editor of your choice and edit the following line to reference your built core connector.
 
-Run this command to bootstrap the test harness on your local machine.
+```yaml
+services:
+  coreConnectorUnderTest: 
+    build:
+      context: ./src/
+    image: mojaloop/mifos-core-connector # edit this line
+    networks:
+      - mojaloop-net
+    env_file: .env.example
+    ports:
+      - "3003:3003" 
+      - "3004:3004" 
+``` 
+
+Edit that line to the name you tagged the docker image at the building step. It should look like this after editing the docker-compose.yaml.
+
+```yaml
+services:
+  coreConnectorUnderTest: 
+    build:
+      context: ./src/
+    image: cbs-core-connector:local # edited line
+    networks:
+      - mojaloop-net
+    env_file: .env.example
+    ports:
+      - "3003:3003" 
+      - "3004:3004" 
+```
+
+After editing the docker-compose.yml, now you can run the test harness. This time it will be bootstrapped using your newly built core connector.
 
 ```bash
 docker compose up 
 ```
-You could also choose to run it in detached mode by adding the `-d` option.
+
+Or in detached mode
 
 ```bash
 docker compose up -d
 ```
 
-After bootstraping the test harness, you are ready to start running tests against your core connector.
+# Core Banking System and TTK Environment Setup
+
+To execute test cases on your core connector, you will need to create some accounts and configure them into the TTK UI to support the tests.
+
+Create these accounts in your core banking system
+- An Invalid Account
+- A Valid Account
+- A disabled Account 
+
+Make sure to note the account numbers or identifiers depending the your preferred account id type.
+
+After creating these accounts, you will need to configure them in TTK Environment Variables such that they are used as part of the test cases being executed.
+
+Open the TTK UI using this link. http://localhost:6060
+
+> Make sure the test harness is running with your core connector
+
+Click on Test Runner in the navigation menu on the left.
+
+Click on Environment Manager in the top right corner of the screen.
+
+- TBD
+
 
 
 # Running Tests
