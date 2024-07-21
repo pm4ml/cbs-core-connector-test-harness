@@ -303,20 +303,24 @@ Open the TTK UI using this link. http://localhost:6060
 
 > Make sure the test harness is running with your core connector
 
+Once you open this link, you will be brought to this interface as shown in this screenshot
+
+![TTK Landing](./assets/TTKLanding.png)
 Click on Test Runner in the navigation menu on the left.
 
+![Test Runner](./assets/TTKTestRunner.png)
 Click on Environment Manager in the top right corner of the screen.
 
-- TBD
+![Test Runner](./assets/TTK_TestRunner2.png)
 
 
+> Instructions on how to edit the Environment Variables TBD
 
 # Running Tests
 To run the tests, you will need to open the TTK UI in your web browser.
 TTK is deployed as part of the test harness.
 
 Follow this link to open the TTK Ui. http://localhost:6060
-
 
 Once you open this link, you will be brought to this interface as shown in this screenshot
 
