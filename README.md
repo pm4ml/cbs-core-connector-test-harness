@@ -10,7 +10,7 @@ Before you go through this test harness documentation, the following are require
 - Git
 
 # Overview 
-This test harness is intended to provide a core connector testing and development framework. The idea of a core connector came about as a result of the need to have an integration middlewear between the Mojaloop Connector (SDK Scheme Adapter) and a Financial Service Provider (FSP) Core Banking System.
+This test harness is intended to provide a core connector testing and development framework. The idea of a core connector came about as a result of the need to have an integration middlewear between the Mojaloop Connector and a Financial Service Provider (FSP) Core Banking System.
 
 # Getting Started
 
@@ -88,7 +88,7 @@ There is also a core banking solution sandbox which represents a financial servi
 
 When executing test cases on your core connector, for different test cases it is important that a quality assurance personal observes the changing state of account balances to validate that the core connector is indeed functioning as intended for both happy path and non happy paths.
 
-Please find the api schema for the mojaloop connector backend api at this location. The core connector needs to expose an api that will be invoked by the sdk scheme adapter api to receive payments from the mojaloop scheme. The api needs to be in sync with the api definition in this api definition.
+Please find the api schema for the mojaloop connector backend api at this location. The core connector needs to expose an api that will be invoked by the Mojaloop Connector api to receive payments from the mojaloop scheme. The api needs to be in sync with the api definition in this api definition.
 
 ```bash
 ./resources/api-spec/payee.yaml
@@ -121,7 +121,7 @@ Here is a [link](/resources/api-spec/ml-connector-bound.yml) to the api schema f
 
 We have also designed a send money RESTful api which your core banking solution can use to send transfer requests to your core connector. 
 
-This send money api is supposed to be implemented by your core connector and exposed as a server on a port so that your core banking solution can use it to initiate send money requests as well as merchant payment requets.
+This send money api definition encaptuates the scheme requirements for this use case. It is recommeded that your core connector implements and exposes that API so that your core banking solution can use it to initiate send money and merchant payment requests. Alternatively you may choose to implement a custom API based off this API
 
 Please find the send money api schema at this location
 
@@ -153,7 +153,7 @@ Use it as the base url for all paths detailed in the api schema for outgoing pay
 
 You can set it as an environment variable and access it within your core connector source code. 
 
-# The Mifos Core Connector
+# The Reference Core Connector (Mifos)
 A reference core connector has been built for the open source core banking system called Apache Fineract built by [The Mifos Initiative](https://mifos.org) and maintained by [Apache Software Foundation](https://www.apache.org/)
 
 For benchmarking purposes, you can refer to the [Mifos Core Connector](https://github.com/mojaloop/mifos-core-connector?tab=readme-ov-file#mifos-core-connector) to draw inspiration for your custom core connector.
