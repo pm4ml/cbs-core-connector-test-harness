@@ -294,6 +294,7 @@ Create these accounts in your core banking system
 - An Invalid Account
 - A Valid Account
 - A disabled Account 
+- An account with transaction threshold (If supported by CBS)
 
 Make sure to note the account numbers or identifiers depending the your preferred account id type.
 
