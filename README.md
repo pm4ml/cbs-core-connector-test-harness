@@ -91,10 +91,10 @@ When executing test cases on your core connector, for different test cases it is
 Please find the api schema for the mojaloop connector backend api at this location. The core connector needs to expose an api that will be invoked by the Mojaloop Connector api to receive payments from the mojaloop scheme. The api needs to be in sync with the api definition in this api definition.
 
 ```bash
-./resources/api-spec/payee.yaml
+./resources/api-spec/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets.yaml
 ```
 
-Here is a [link](./resources/api-spec/payee.yaml) to the api schema file
+Here is a [link](./resources/api-spec/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets.yaml) to the api schema file
 
 When an inbound payment is received by the  mojaloop connector, it will make requests to your core connector to perform account lookup, quoting and transfers.
 
@@ -114,10 +114,10 @@ As you develop your connector, it is important that your core connector conforms
 Please find the api schema for the mojaloop connector outgoing api at the this location
 
 ```bash
-./resources/api-spec/ml-connector-bound.yml
+./resources/api-spec/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets.yaml
 ```
 
-Here is a [link](/resources/api-spec/ml-connector-bound.yml) to the api schema file
+Here is a [link](/resources/api-spec/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets.yaml) to the api schema file
 
 We have also designed a send money RESTful api which your core banking solution can use to send transfer requests to your core connector. 
 
@@ -260,6 +260,7 @@ services:
 
 Edit that line to the name you tagged the docker image at the building step. It should look like this after editing the docker-compose.yaml.
 
+Update the .env.example file with all the environment variables that are required the core connector going to be tested.
 ```yaml
 services:
   coreConnectorUnderTest: 
