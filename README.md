@@ -260,6 +260,7 @@ services:
 
 Edit that line to the name you tagged the docker image at the building step. It should look like this after editing the docker-compose.yaml.
 
+Update the .env.example file with all the environment variables that are required the core connector going to be tested.
 ```yaml
 services:
   coreConnectorUnderTest: 

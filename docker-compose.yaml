@@ -5,10 +5,23 @@ networks:
 
 
 services:
-  coreConnectorUnderTest: 
+  mojaloop-connector:
+    image: stoplight/prism:4
+    command: mock -h 0.0.0.0 "/tmp/api.oas2.yml"
+    volumes:
+      - ./resources/api-spec:/tmp
+    ports:
+      - "4010:4010"
+    init: true
+    container_name: mojaloop-connector
+    restart: unless-stopped
+    networks:
+      - mojaloop-net
+
+  core-connector: 
     build:
       context: ./src/
-    image: mojaloop/mifos-core-connector # cbs-core-connector:local
+    image: mojaloop/airtel-core-connector # edit this line
     networks:
       - mojaloop-net
     env_file: .env.example
