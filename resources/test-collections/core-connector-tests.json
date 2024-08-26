@@ -73,10 +73,10 @@
             "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/trigger_templates"
           },
           "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/7bf63d7c-9254-47e0-8720-a153b2236785",
+          "path": "/send-money/abce5715-9a6a-4cdf-830f-9fb35b45a870",
           "method": "put",
           "params": {
-            "transferId": "7bf63d7c-9254-47e0-8720-a153b2236785"
+            "transferId": "abce5715-9a6a-4cdf-830f-9fb35b45a870"
           },
           "url": "http://core-connector:3004",
           "body": {
@@ -411,7 +411,867 @@
                 ]
               }
             ]
-          }
+          },
+          "disabled": false
+        },
+        {
+          "id": 5,
+          "description": "Get parties with unsupported ID",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/parties/{IdType}/{ID}",
+          "path": "/parties/IBAN/978980797",
+          "method": "get",
+          "params": {
+            "ID": "978980797",
+            "IdType": "IBAN"
+          },
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 6,
+          "description": "Get Parties with no parties found",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/parties/{IdType}/{ID}",
+          "path": "/parties/MSISDN/971938765",
+          "method": "get",
+          "params": {
+            "ID": "971938765",
+            "IdType": "MSISDN"
+          },
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check Status code is 404",
+                "exec": [
+                  "expect(response.status).not.to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 7,
+          "description": "POST Quote Requests with Missing Values",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "body": {},
+          "disabled": false
+        },
+        {
+          "id": 8,
+          "description": "POST Quote Requests with Invalid ID type",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if Status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check that Mojaloop status code is 3100",
+                "exec": [
+                  "expect(response.body.status).to.equal(\"3100\")"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "amount": "500",
+            "amountType": "SEND",
+            "currency": "ZMW",
+            "from": {
+              "idType": "MSISDN",
+              "idValue": "978034884"
+            },
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER",
+            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
+            "to": {
+              "idType": "IBAN",
+              "idValue": "978980797"
+            },
+            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
+            "transactionType": "TRANSFER"
+          },
+          "disabled": false
+        },
+        {
+          "id": 9,
+          "description": "POST QUOTE Requests if currency is not supported",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check that response status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check that Mojaloop status code is 5106",
+                "exec": [
+                  "expect(response.body.status).to.equal(\"5106\")"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "amount": "500",
+            "amountType": "SEND",
+            "currency": "KES",
+            "from": {
+              "idType": "MSISDN",
+              "idValue": "978034884"
+            },
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER",
+            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
+            "to": {
+              "idType": "MSISDN",
+              "idValue": "978980797"
+            },
+            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
+            "transactionType": "TRANSFER"
+          },
+          "disabled": false
+        },
+        {
+          "id": 10,
+          "description": "POST QUOTE Requests if account is blocked",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if response status code is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check if Mojaloop status code is 5400",
+                "exec": [
+                  "expect(response.body.status).to.equal(\"5400\")"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "amount": "500",
+            "amountType": "SEND",
+            "currency": "ZMW",
+            "from": {
+              "idType": "MSISDN",
+              "idValue": "978034884"
+            },
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER",
+            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
+            "to": {
+              "idType": "MSISDN",
+              "idValue": "978009727"
+            },
+            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
+            "transactionType": "TRANSFER"
+          },
+          "disabled": false
+        },
+        {
+          "id": 11,
+          "description": "POST Transfers with invalid ID type",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers",
+          "path": "/transfers",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if Status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check if Mojaloop Status code is 3100",
+                "exec": [
+                  "expect(response.body.status).to.equal(\"3100\")"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "amount": "500",
+            "amountType": "SEND",
+            "currency": "ZMW",
+            "from": {
+              "idType": "IBAN",
+              "idValue": "ZM29934000343343"
+            },
+            "to": {
+              "idType": "IBAN",
+              "idValue": "978980797"
+            },
+            "ilpPacket": {
+              "data": {
+                "amount": {
+                  "amount": "500",
+                  "currency": "ZMW"
+                },
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "fspId": "airtel-123-qwerty"
+                  },
+                  "merchantClassificationCode": "1234",
+                  "name": "Payee Name",
+                  "personalInfo": {
+                    "complexName": {
+                      "firstName": "PayeeFirstName",
+                      "lastName": "PayeeLastName"
+                    },
+                    "dateOfBirth": "YYYY-MM-DD"
+                  },
+                  "supportedCurrencies": [
+                    "ZMW"
+                  ]
+                },
+                "payer": {
+                  "idType": "IBAN",
+                  "idValue": "ZM29934000343343"
+                },
+                "quoteId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
+                "transactionId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
+                "transactionType": {
+                  "initiator": "PAYER",
+                  "initiatorType": "CONSUMER",
+                  "scenario": "TRANSFER",
+                  "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
+                }
+              }
+            },
+            "note": "Transfer Quote Request"
+          },
+          "disabled": false
+        },
+        {
+          "id": 12,
+          "description": "POST Transfers with unsupported currency",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers",
+          "path": "/transfers",
+          "method": "post",
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if Status Code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "amount": "500",
+            "amountType": "SEND",
+            "currency": "KES",
+            "from": {
+              "idType": "IBAN",
+              "idValue": "ZM29934000343343"
+            },
+            "to": {
+              "idType": "MSISDN",
+              "idValue": "978980797"
+            },
+            "ilpPacket": {
+              "data": {
+                "amount": {
+                  "amount": "500",
+                  "currency": "ZMW"
+                },
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "fspId": "airtel-123-qwerty"
+                  },
+                  "merchantClassificationCode": "1234",
+                  "name": "Payee Name",
+                  "personalInfo": {
+                    "complexName": {
+                      "firstName": "PayeeFirstName",
+                      "lastName": "PayeeLastName"
+                    },
+                    "dateOfBirth": "YYYY-MM-DD"
+                  },
+                  "supportedCurrencies": [
+                    "ZMW"
+                  ]
+                },
+                "payer": {
+                  "idType": "IBAN",
+                  "idValue": "ZM29934000343343"
+                },
+                "quoteId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
+                "transactionId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
+                "transactionType": {
+                  "initiator": "PAYER",
+                  "initiatorType": "CONSUMER",
+                  "scenario": "TRANSFER",
+                  "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
+                }
+              }
+            },
+            "note": "Transfer Quote Request"
+          },
+          "disabled": false
+        },
+        {
+          "id": 13,
+          "description": "PUT transfers/{transferId} with current state ERROR_OCCURED",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/{transferId}",
+          "method": "put",
+          "params": {
+            "transferId": ""
+          },
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if status code is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check if response message is equal to ERROR_OCCURRED",
+                "exec": [
+                  "expect(response.body.message).to.equal(\"Transfer Not Completed Error\")"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "currentState": "ERROR_OCCURRED",
+            "direction": "INBOUND",
+            "finalNotification": {
+              "completedTimestamp": "6966-12-29T00:03:24.449Z",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "transferState": "RECEIVED"
+            },
+            "fulfil": {
+              "body": {},
+              "headers": {}
+            },
+            "initiatedTimestamp": "1197-12-29T23:21:38.743Z",
+            "lastError": {
+              "httpStatusCode": 0,
+              "mojaloopError": {
+                "errorInformation": {
+                  "errorCode": "5100",
+                  "errorDescription": "string",
+                  "extensionList": {
+                    "extension": [
+                      {
+                        "key": "string",
+                        "value": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "prepare": {
+              "body": {},
+              "headers": {}
+            },
+            "quote": {
+              "fulfilment": "string",
+              "internalRequest": {},
+              "mojaloopResponse": {},
+              "request": {},
+              "response": {}
+            },
+            "quoteRequest": {
+              "body": {
+                "quoteId": "",
+                "transactionId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e",
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "amountType": "SEND",
+                "amount": {
+                  "amount": "500",
+                  "currency": "ZMW"
+                },
+                "transactionType": {
+                  "scenario": "TRANSFER",
+                  "subScenario": null,
+                  "initiator": "PAYER",
+                  "initiatorType": "BUSINESS",
+                  "refundInfo": null,
+                  "balanceOfPayments": null
+                }
+              },
+              "headers": {}
+            },
+            "quoteResponse": {
+              "body": {},
+              "headers": {}
+            },
+            "transferId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e"
+          },
+          "disabled": false
+        },
+        {
+          "id": 14,
+          "description": "PUT transfers with unsupported currency ",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/{transferId}",
+          "method": "put",
+          "params": {
+            "transferId": ""
+          },
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "currentState": "COMPLETED",
+            "direction": "INBOUND",
+            "finalNotification": {
+              "completedTimestamp": "6966-12-29T00:03:24.449Z",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "transferState": "RECEIVED"
+            },
+            "fulfil": {
+              "body": {},
+              "headers": {}
+            },
+            "initiatedTimestamp": "1197-12-29T23:21:38.743Z",
+            "lastError": {
+              "httpStatusCode": 0,
+              "mojaloopError": {
+                "errorInformation": {
+                  "errorCode": "5100",
+                  "errorDescription": "string",
+                  "extensionList": {
+                    "extension": [
+                      {
+                        "key": "string",
+                        "value": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "prepare": {
+              "body": {},
+              "headers": {}
+            },
+            "quote": {
+              "fulfilment": "string",
+              "internalRequest": {},
+              "mojaloopResponse": {},
+              "request": {},
+              "response": {}
+            },
+            "quoteRequest": {
+              "body": {
+                "quoteId": "",
+                "transactionId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e",
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "amountType": "SEND",
+                "amount": {
+                  "amount": "500",
+                  "currency": "KES"
+                },
+                "transactionType": {
+                  "scenario": "TRANSFER",
+                  "subScenario": null,
+                  "initiator": "PAYER",
+                  "initiatorType": "BUSINESS",
+                  "refundInfo": null,
+                  "balanceOfPayments": null
+                }
+              },
+              "headers": {}
+            },
+            "quoteResponse": {
+              "body": {},
+              "headers": {}
+            },
+            "transferId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e"
+          },
+          "disabled": false
+        },
+        {
+          "id": 15,
+          "description": "PUT transfers with invalid ID type",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec_1.0/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/{transferId}",
+          "method": "put",
+          "params": {
+            "transferId": ""
+          },
+          "url": "http://core-connector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check If status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "currentState": "COMPLETED",
+            "direction": "INBOUND",
+            "finalNotification": {
+              "completedTimestamp": "6966-12-29T00:03:24.449Z",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "transferState": "RECEIVED"
+            },
+            "fulfil": {
+              "body": {},
+              "headers": {}
+            },
+            "initiatedTimestamp": "1197-12-29T23:21:38.743Z",
+            "lastError": {
+              "httpStatusCode": 0,
+              "mojaloopError": {
+                "errorInformation": {
+                  "errorCode": "5100",
+                  "errorDescription": "string",
+                  "extensionList": {
+                    "extension": [
+                      {
+                        "key": "string",
+                        "value": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "prepare": {
+              "body": {},
+              "headers": {}
+            },
+            "quote": {
+              "fulfilment": "string",
+              "internalRequest": {},
+              "mojaloopResponse": {},
+              "request": {},
+              "response": {}
+            },
+            "quoteRequest": {
+              "body": {
+                "quoteId": "",
+                "transactionId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e",
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "IBAN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "978980797",
+                    "partySubIdOrType": null,
+                    "fspId": null,
+                    "extensionList": null
+                  },
+                  "merchantClassificationCode": null,
+                  "name": null,
+                  "personalInfo": null,
+                  "supportedCurrencies": null
+                },
+                "amountType": "SEND",
+                "amount": {
+                  "amount": "500",
+                  "currency": "ZMW"
+                },
+                "transactionType": {
+                  "scenario": "TRANSFER",
+                  "subScenario": null,
+                  "initiator": "PAYER",
+                  "initiatorType": "BUSINESS",
+                  "refundInfo": null,
+                  "balanceOfPayments": null
+                }
+              },
+              "headers": {}
+            },
+            "quoteResponse": {
+              "body": {},
+              "headers": {}
+            },
+            "transferId": "47e8a9cd-3d89-55c5-a15a-b57a28ad763e"
+          },
+          "disabled": false
         }
       ]
     }
