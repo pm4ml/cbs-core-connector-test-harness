@@ -97,6 +97,96 @@
           },
           "disabled": false,
           "scriptingEngine": "javascript"
+        },
+        {
+          "id": 3,
+          "description": "POST Send Money with unsupported currency",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec-dfsp",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "url": "http://core-connector:3004",
+          "body": {
+            "homeTransactionId": "HTX123456789",
+            "payeeId": "07676767676",
+            "payeeIdType": "MSISDN",
+            "sendAmount": "500",
+            "sendCurrency": "KES",
+            "receiveCurrency": "ZMW",
+            "transactionDescription": "Payment for services",
+            "transactionType": "TRANSFER",
+            "payer": "Elikah Okello",
+            "payerAccount": "978980797",
+            "dateOfBirth": "1985-04-12"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 4,
+          "description": "PUT send-money/{id} with accept quote false",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "core-connector-api-spec-dfsp",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-dfsp_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money/{transferId}",
+          "path": "/send-money/{transferId}",
+          "method": "put",
+          "params": {
+            "transferId": ""
+          },
+          "body": {
+            "acceptQuote": false,
+            "msisdn": "978980797",
+            "amount": 500
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check if Status code is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check if Status response message ",
+                "exec": [
+                  "expect(response.body.message).to.equal(\"Payer rejected transaction request\")"
+                ]
+              }
+            ]
+          },
+          "url": "http://core-connector:3004"
         }
       ]
     },
