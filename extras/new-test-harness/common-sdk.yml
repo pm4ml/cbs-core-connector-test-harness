@@ -1,0 +1,27 @@
+version: '3.7'
+networks:
+  mojaloop-net:
+    name: mojaloop-net
+
+services:
+
+  api-svc:
+    networks:
+        - mojaloop-net
+    image: mojaloop/sdk-scheme-adapter:local
+    build:
+      context: ../../
+    command: yarn nx run modules-api-svc:start
+    user: root # Set Root so we can install Curl for Healthchecks
+    healthcheck:
+      test: [
+        "CMD" ,
+        "apk", "add", "--no-cache", "curl", # Install curl
+        "&&",
+        "curl", "-f", "http://localhost:4001" # Check if api is up
+        ]
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+      interval: 30s
+

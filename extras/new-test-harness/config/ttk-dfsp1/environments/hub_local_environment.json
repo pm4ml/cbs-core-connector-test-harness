@@ -1,0 +1,39 @@
+{
+    "options": {
+        "breakOnError": false,
+        "transformerName": "none",
+        "generateIDType": "ulid"
+    },
+    "inputValues": {
+        "DFSP1_FSPID": "dfsp1",
+        "DFSP1_MSISDN_1": "16135551212",
+        "DFSP1_MSISDN_1_FIRST_NAME": "ReceiverFirst",
+        "DFSP1_MSISDN_1_LAST_NAME": "ReceiverLast",
+        "DFSP1_CURRENCY": "XXX",
+        "DFSP2_FSPID": "dfsp2",
+        "DFSP2_MSISDN_1": "4561000001",
+        "DFSP2_MSISDN_1_FIRST_NAME": "ReceiverFirst",
+        "DFSP2_MSISDN_1_LAST_NAME": "ReceiverLast",
+        "DFSP2_MSISDN_2": "4561000002",
+        "DFSP2_MSISDN_2_FIRST_NAME": "ReceiverFirst",
+        "DFSP2_MSISDN_2_LAST_NAME": "ReceiverLast",
+        "DFSP2_PARTY_NOT_FOUND": "partynotfound",
+        "DFSP2_PARTY_TIMES_OUT": "partytimesout",
+        "DFSP2_CURRENCY": "XTS",
+        "DFSP2_MSISDN_PREFIX": "4561",
+        "FXP_TO_PARTY_ID": "2551234567890",
+        "FXP_FROM_PARTY_ID": "9551234567891",
+        "FXP_PAYER_DFSP_ID": "dfsp1",
+        "FXP_PAYEE_DFSP_ID": "dfsp2",
+        "FXP_ID": "fxp1",
+        "FXP_TESTFXP1_ID": "fxp1",
+        "FXP_FXPAYERDFSP_ID": "dfsp1",
+        "FXP_FXPAYEEDFSP_ID": "dfsp2",
+        "FXP_EXPIRATION": "2023-12-25T14:17:09.663+01:00",
+        "FXP_SOURCE_CURRENCY": "XXX",
+        "FXP_TARGET_CURRENCY": "XTS",
+        "FXP_SOURCE_CURRENCY_ALTERNATIVE": "XXX",
+        "FXP_SOURCE_AMOUNT": "300",
+        "FXP_TARGET_AMOUNT": "48000"
+    }
+}
