@@ -96,6 +96,13 @@
       "version": "2.1",
       "folderPath": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets_2.1",
       "asynchronous": false
+    },
+    {
+      "type": "send-money-api",
+      "version": "1.0",
+      "folderPath": "send-money-api_1.0",
+      "asynchronous": false,
+      "additionalApi": true
     }
   ]
 }

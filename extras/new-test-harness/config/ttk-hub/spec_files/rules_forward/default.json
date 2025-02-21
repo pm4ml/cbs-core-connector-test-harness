@@ -12,18 +12,6 @@
     "conditions": {
       "all": [
         {
-          "fact": "pathParams",
-          "operator": "numberStringGreaterThanInclusive",
-          "value": "4561000000",
-          "path": "ID"
-        },
-        {
-          "fact": "pathParams",
-          "operator": "numberStringLessThanInclusive",
-          "value": "4561999999",
-          "path": "ID"
-        },
-        {
           "fact": "operationPath",
           "operator": "equal",
           "value": "/parties/{Type}/{ID}"
@@ -39,52 +27,6 @@
       "params": {
         "to": "dfsp2",
         "dfspId": "dfsp2"
-      },
-      "type": "FORWARD"
-    },
-    "type": "forward",
-    "version": 1
-  },
-  {
-    "ruleId": 2,
-    "priority": 1,
-    "description": "get /parties/{Type}/{ID}",
-    "apiVersion": {
-      "minorVersion": 0,
-      "majorVersion": 2,
-      "type": "iso20022",
-      "asynchronous": true
-    },
-    "conditions": {
-      "all": [
-        {
-          "fact": "pathParams",
-          "operator": "numberStringGreaterThanInclusive",
-          "value": "5671000000",
-          "path": "ID"
-        },
-        {
-          "fact": "pathParams",
-          "operator": "numberStringLessThanInclusive",
-          "value": "5671999999",
-          "path": "ID"
-        },
-        {
-          "fact": "operationPath",
-          "operator": "equal",
-          "value": "/parties/{Type}/{ID}"
-        },
-        {
-          "fact": "method",
-          "operator": "equal",
-          "value": "get"
-        }
-      ]
-    },
-    "event": {
-      "params": {
-        "to": "ttksim3",
-        "dfspId": "ttksim3"
       },
       "type": "FORWARD"
     },
