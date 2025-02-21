@@ -192,3 +192,21 @@ services:
       - /usr/share/nginx/start.sh
     profiles:
       - debug
+
+  core-connector1:
+    image: mojaloop/mtn-ug-core-connector:v1.16.0.local
+    env_file: ./config/core-connector1/config.env
+    networks:
+      - mojaloop-net
+    ports:
+      - "13003:3003"
+      - "13004:3004"
+
+  core-connector2:
+    image: mojaloop/mtn-ug-core-connector:v1.16.0.local
+    env_file: ./config/core-connector2/config.env
+    networks:
+      - mojaloop-net
+    ports:
+      - "23003:3003"
+      - "23004:3004"
