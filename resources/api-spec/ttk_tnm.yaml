@@ -4,7 +4,7 @@ info:
   description: This API is for handling third-party payments on Mpamba Core Payment System.
   version: 1.0.0
 servers:
-  - url: http://{{baseurl}}
+  - url: http://baseurl
 components:
   securitySchemes:
     bearerAuth:
@@ -49,8 +49,8 @@ paths:
             schema:
               type: object
               example:
-                wallet: '{{wallet}}'
-                password: '{{password}}'
+                wallet: 'wallet'
+                password: 'password'
       responses:
         '200':
           description: OK
@@ -410,7 +410,7 @@ paths:
               example:
                 msisdn: '0886788210'
                 amount: '100'
-                transaction_id: '{{transaction_id}}'
+                transaction_id: 'transaction_id'
                 narration: Payment for test
       responses:
         '200':
@@ -744,7 +744,7 @@ paths:
             schema:
               type: object
               example:
-                invoice_number: '{{transaction_id}}'
+                invoice_number: 'transaction_id'
                 amount: 300
                 msisdn: '265886788210'
                 description: Test invoice
@@ -1303,7 +1303,7 @@ paths:
             schema:
               type: object
               example:
-                wallet: '{{wallet}}'
+                wallet: 'wallet'
       security:
         - noauthAuth: []
       parameters:
@@ -1430,7 +1430,7 @@ paths:
             schema:
               type: object
               example:
-                wallet: '{{wallet}}'
+                wallet: 'wallet'
                 new_password: zC)f<XdH>J9uk:siMz#%xA9A_KT.j]mI
                 new_password_confirmation: zC)f<XdH>J9uk:siMz#%xA9A_KT.j]mI
                 reset_code: Y1vvid5fx8reHoDH
