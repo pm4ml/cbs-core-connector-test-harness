@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Collection Token API
+  version: 1.0.0
+tags:
+  - name: Collection
+    description: API related to collection operations
+paths:
+  /collection/token:
+    post:
+      summary: Generate an access token
+      description: Issues a new access token for authentication.
+      operationId: generateAccessToken
+      tags:
+        - Collection
+      responses:
+        '200':
+          description: Access token generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The generated access token
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /collection/v1_0/accountholder/MSISDN/{msisdn}/basicuserinfo:
+    get:
+      summary: Retrieve basic user info
+      description: Fetches basic user information for the given MSISDN.
+      operationId: getBasicUserInfo
+      tags:
+        - Collection
+      parameters:
+        - name: msisdn
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The MSISDN of the account holder
+      responses:
+        '200':
+          description: Basic user information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  given_name:
+                    type: string
+                    description: Given name of the user
+                  family_name:
+                    type: string
+                    description: Family name of the user
+                  birthdate:
+                    type: string
+                    format: date
+                    description: Birthdate of the user
+                  locale:
+                    type: string
+                    description: Locale of the user
+                  gender:
+                    type: string
+                    description: Gender of the user
+                  status:
+                    type: string
+                    description: Status of the user
+        '400':
+          description: Bad request
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /collection/v1_0/requesttopay:
+    post:
+      summary: Request to pay
+      description: Initiates a payment request.
+      operationId: requestToPay
+      tags:
+        - Collection
+      responses:
+        '202':
+          description: Payment request accepted
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
