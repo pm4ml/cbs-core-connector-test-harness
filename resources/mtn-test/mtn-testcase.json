@@ -1,0 +1,370 @@
+{
+  "options": {
+    "breakOnError": true,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  },
+  "name": "mtn-tests",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "P2P Send Money",
+      "fileInfo": {
+        "path": "mtn-tests.json"
+      },
+      "meta": {
+        "info": "Outbound Transfer"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /send-money",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$inputs.payeeId}",
+            "payeeIdType": "{$inputs.payeeIdType}",
+            "sendAmount": "{$inputs.sendAmount}",
+            "sendCurrency": "{$inputs.sendCurrency}",
+            "receiveCurrency": "{$inputs.receiveCurrency}",
+            "transactionDescription": "Payment for services",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$inputs.payerName}",
+              "payerId": "{$inputs.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$inputs.payerDOB}",
+                "PrvcOfBirth": "{$inputs.payerPrvncOB}",
+                "CityOfBirth": "{$inputs.payerCityOB}",
+                "CtryOfBirth": "{$inputs.payerCtryOB}"
+              }
+            }
+          },
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "disabled": false,
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 2,
+          "description": "PUT /send-money/{id}",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/send-money/{transferId}",
+          "path": "/send-money/{$prev.1.response.body.homeTransactionId}",
+          "method": "put",
+          "params": {
+            "transferId": "{$prev.1.response.body.homeTransactionId}"
+          },
+          "body": {
+            "acceptQuote": true,
+            "msisdn": "{$inputs.payerId}",
+            "amount": "{$inputs.sendAmount}"
+          },
+          "disabled": false,
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "queryParams": {}
+        },
+        {
+          "id": 5,
+          "description": "Send Money PUT /callback",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/callback",
+          "path": "/callback",
+          "method": "put",
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "body": {
+            "financialTransactionId": "FT123456789012345678",
+            "externalId": "{$prev.1.response.body.transactionId}",
+            "amount": "{$inputs.sendAmount}",
+            "currency": "{$inputs.sendCurrency}",
+            "payee": {
+              "partyIdType": "MSISDN",
+              "partyId": "{$inputs.payeeId}"
+            },
+            "payeeNote": "Payment for invoice #1234",
+            "status": "SUCCESSFUL"
+          },
+          "disabled": false,
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check Status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "P2B Merchant Payment",
+      "fileInfo": {
+        "path": "mtn-tests.json"
+      },
+      "meta": {
+        "info": "Outbound Transfer"
+      },
+      "requests": [
+        {
+          "id": 3,
+          "description": "POST /merchant-payment",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/merchant-payment",
+          "path": "/merchant-payment",
+          "method": "post",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$inputs.payeeId}",
+            "payeeIdType": "{$inputs.payeeIdType}",
+            "sendAmount": "{$inputs.merchantAmount}",
+            "sendCurrency": "{$inputs.sendCurrency}",
+            "receiveCurrency": "{$inputs.receiveCurrency}",
+            "transactionDescription": "Payment for services",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$inputs.payerName}",
+              "payerId": "{$inputs.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$inputs.payerDOB}",
+                "PrvcOfBirth": "{$inputs.payerPrvncOB}",
+                "CityOfBirth": "{$inputs.payerCityOB}",
+                "CtryOfBirth": "{$inputs.payerCtryOB}"
+              }
+            }
+          },
+          "disabled": true,
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 4,
+          "description": "PUT /merchant-payment/{id}",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/merchant-payment/{id}",
+          "path": "/merchant-payment/{$prev.3.response.body.homeTransactionId}",
+          "method": "put",
+          "params": {
+            "id": "{$prev.3.response.body.homeTransactionId}"
+          },
+          "body": {
+            "acceptQuote": true,
+            "msisdn": "{$inputs.payerId}",
+            "amount": "{$inputs.sendAmount}"
+          },
+          "disabled": true,
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "headers": {},
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 6,
+          "description": "Merchant PUT /Callback",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 1,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_1.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_1.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_1.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_1.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_1.0/trigger_templates"
+          },
+          "operationPath": "/callback",
+          "path": "/callback",
+          "method": "put",
+          "url": "http://mtnuganda-mojaloop-core-connector:3004",
+          "body": {
+            "financialTransactionId": "FT123456789012345678",
+            "externalId": "{$prev.3.response.body.transactionId}",
+            "amount": "{$inputs.sendAmount}",
+            "currency": "{$inputs.sendCurrency}",
+            "payee": {
+              "partyIdType": "MSISDN",
+              "partyId": "{$inputs.payeeId}"
+            },
+            "payeeNote": "Payment for invoice #1234",
+            "status": "SUCCESSFUL"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check Status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "disabled": true,
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
