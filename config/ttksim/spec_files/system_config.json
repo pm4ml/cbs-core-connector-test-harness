@@ -173,6 +173,21 @@
       "folderPath": "core-connector-api-spec_1.0",
       "asynchronous": false,
       "additionalApi": true
+    },
+    {
+      "type": "core-connector-api-spec",
+      "version": "1.1",
+      "folderPath": "core-connector-api-spec_1.1",
+      "asynchronous": false,
+      "additionalApi": true
+    },
+    {
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2",
+      "version": "2.1",
+      "folderPath": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1",
+      "asynchronous": false,
+      "additionalApi": true,
+      "prefix": "/out"
     }
   ],
   "SOCKET_IO_ENGINE_OPTIONS": {

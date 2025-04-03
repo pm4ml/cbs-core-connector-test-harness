@@ -291,5 +291,531 @@
     },
     "type": "response",
     "version": 1
+  },
+  {
+    "ruleId": 7,
+    "priority": 1,
+    "description": "post /transfers",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2",
+      "asynchronous": false,
+      "prefix": "/out",
+      "additionalApi": true,
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "homeTransactionId": "string",
+          "from": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "UGX"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "to": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "XXX"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "amountType": "SEND",
+          "currency": "{$request.body.currency}",
+          "amount": "{$request.body.amount}",
+          "transactionType": "TRANSFER",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "note": "Note sent to Payee.",
+          "currentState": "WAITING_FOR_CONVERSION_ACCEPTANCE",
+          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "getPartiesResponse": {
+            "body": {
+              "party": {
+                "partyIdInfo": {
+                  "partyIdType": "MSISDN",
+                  "partyIdentifier": "16135551212",
+                  "partySubIdOrType": "string",
+                  "fspId": "string",
+                  "extensionList": {
+                    "extension": [
+                      {
+                        "key": "string",
+                        "value": "string"
+                      }
+                    ]
+                  }
+                },
+                "merchantClassificationCode": "string",
+                "name": "string",
+                "personalInfo": {
+                  "complexName": {
+                    "firstName": "Henrik",
+                    "middleName": "Johannes",
+                    "lastName": "Karlsson"
+                  },
+                  "dateOfBirth": "1966-06-16",
+                  "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+                },
+                "supportedCurrencies": [
+                  "XXX"
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponse": {
+            "body": {
+              "transferAmount": {
+                "currency": "XXX",
+                "amount": "{$environment.targetAmount}"
+              },
+              "payeeReceiveAmount": {
+                "currency": "XXX",
+                "amount": "{$environment.payeeReceiveAmount}"
+              },
+              "payeeFspFee": {
+                "currency": "XXX",
+                "amount": "{$environment.payeeFspFee}"
+              },
+              "payeeFspCommission": {
+                "currency": "XXX",
+                "amount": "0"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponseSource": "string",
+          "conversionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "fxQuoteResponse": {
+            "body": {
+              "homeTransactionId": "string",
+              "condition": "string",
+              "conversionTerms": {
+                "conversionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "initiatingFsp": "string",
+                "counterPartyFsp": "string",
+                "amountType": "SEND",
+                "sourceAmount": {
+                  "currency": "{$request.body.currency}",
+                  "amount": "{$request.body.amount}"
+                },
+                "targetAmount": {
+                  "currency": "XXX",
+                  "amount": "{$environment.targetAmount}"
+                },
+                "expiration": "2016-05-24T08:38:08.699-04:00",
+                "charges": [
+                  {
+                    "chargeType": "string",
+                    "sourceAmount": {
+                      "currency": "{$request.body.currency}",
+                      "amount": "{$environment.sourceCharge}"
+                    },
+                    "targetAmount": {
+                      "currency": "XXX",
+                      "amount": "{$environment.targetCharge}"
+                    }
+                  }
+                ],
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "fxQuotesResponseSource": "string",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+              "errorInformation": {
+                "errorCode": "5100",
+                "errorDescription": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "skipPartyLookup": true
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "environment.payeeFspFee = 1.1",
+            "environment.targetAmount = 1500",
+            "environment.payeeReceiveAmount = environment.targetAmount  - environment.payeeFspFee",
+            "environment.sourceCharge = environment.targetAmount * 0.01",
+            "environment.targetCharge = environment.targetAmount * 0.1"
+          ],
+          "scriptingEngine": "javascript"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 8,
+    "priority": 1,
+    "description": "PUT /transfers acceptConversion send money",
+    "apiVersion": {
+      "minorVersion": 1,
+      "majorVersion": 2,
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2",
+      "asynchronous": false,
+      "prefix": "/out",
+      "additionalApi": true,
+      "specFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers/{transferId}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "put"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "homeTransactionId": "string",
+          "from": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "supportedCurrencies": [
+              "{$environment.sourceCurrency}"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "to": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "test-xxx-dfsp",
+            "supportedCurrencies": [
+              "XXX"
+            ],
+            "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "amountType": "SEND",
+          "currency": "{$environment.sourceCurrency}",
+          "amount": "{$environment.sourceAmount}",
+          "transactionType": "TRANSFER",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "note": "Note sent to Payee.",
+          "currentState": "WAITING_FOR_QUOTE_ACCEPTANCE",
+          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "getPartiesResponse": {
+            "body": {
+              "party": {
+                "partyIdInfo": {
+                  "partyIdType": "MSISDN",
+                  "partyIdentifier": "16135551212",
+                  "partySubIdOrType": "string",
+                  "fspId": "string",
+                  "extensionList": {
+                    "extension": [
+                      {
+                        "key": "string",
+                        "value": "string"
+                      }
+                    ]
+                  }
+                },
+                "merchantClassificationCode": "string",
+                "name": "Grace Ibingira",
+                "personalInfo": {
+                  "complexName": {
+                    "firstName": "Henrik",
+                    "middleName": "Johannes",
+                    "lastName": "Karlsson"
+                  },
+                  "dateOfBirth": "1966-06-16",
+                  "kycInformation": "{\n    \"metadata\": {\n        \"format\": \"JSON\",\n        \"version\": \"1.0\",\n        \"description\": \"Data containing KYC Information\"\n    },\n    \"data\": {\n        \"name\": \"John Doe\",\n        \"dob\": \"1980-05-15\",\n        \"gender\": \"Male\",\n        \"address\": \"123 Main Street, Anytown, USA\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"+1 555-123-4567\",\n        \"nationality\": \"US\",\n        \"passport_number\": \"AB1234567\",\n        \"issue_date\": \"2010-02-20\",\n        \"expiry_date\": \"2025-02-20\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_name\": \"Example Bank\",\n        \"employer\": \"ABC Company\",\n        \"occupation\": \"Software Engineer\",\n        \"income\": \"$80,000 per year\",\n        \"marital_status\": \"Single\",\n        \"dependents\": 0,\n        \"risk_level\": \"Low\"\n    }\n}"
+                },
+                "supportedCurrencies": [
+                  "XXX"
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponse": {
+            "body": {
+              "transferAmount": {
+                "currency": "XXX",
+                "amount": "{$environment.targetAmount}"
+              },
+              "payeeReceiveAmount": {
+                "currency": "XXX",
+                "amount": "{$environment.payeeReceiveAmount}"
+              },
+              "payeeFspFee": {
+                "currency": "XXX",
+                "amount": "{$environment.payeeFspFee}"
+              },
+              "payeeFspCommission": {
+                "currency": "XXX",
+                "amount": "0"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponseSource": "string",
+          "conversionRequestId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "fxQuoteResponse": {
+            "body": {
+              "homeTransactionId": "string",
+              "condition": "string",
+              "conversionTerms": {
+                "conversionId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "determiningTransferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+                "initiatingFsp": "string",
+                "counterPartyFsp": "string",
+                "amountType": "SEND",
+                "sourceAmount": {
+                  "currency": "{$environment.sourceCurrency}",
+                  "amount": "{$environment.sourceAmount}"
+                },
+                "targetAmount": {
+                  "currency": "XXX",
+                  "amount": "{$environment.targetAmount}"
+                },
+                "expiration": "2016-05-24T08:38:08.699-04:00",
+                "charges": [
+                  {
+                    "chargeType": "string",
+                    "sourceAmount": {
+                      "currency": "{$environment.sourceCurrency}",
+                      "amount": "{$environment.sourceCharge}"
+                    },
+                    "targetAmount": {
+                      "currency": "XXX",
+                      "amount": "{$environment.targetCharge}"
+                    }
+                  }
+                ],
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "fxQuotesResponseSource": "string",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+              "errorInformation": {
+                "errorCode": "5100",
+                "errorDescription": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "skipPartyLookup": true
+        },
+        "statusCode": "200",
+        "scripts": {
+          "exec": [
+            "environment.payeeFspFee = 0",
+            "environment.sourceAmount = 150",
+            "environment.sourceCurrency = \"UGX\"",
+            "environment.targetAmount = 1500",
+            "environment.payeeReceiveAmount = environment.targetAmount  - environment.payeeFspFee",
+            "environment.sourceCharge = environment.targetAmount * 0.01",
+            "environment.targetCharge = environment.targetAmount * 0.1"
+          ],
+          "scriptingEngine": "javascript"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
   }
 ]
