@@ -17,7 +17,7 @@ services:
 
   TtkBackend:
     networks:
-      - mojaloop-net
+      - mojaloop-net 
     ## TODO: Change the following version to standard version
     image: mojaloop/ml-testing-toolkit:v18.7.4
     # image: mojaloop/ml-testing-toolkit:v16.1.0-snapshot.3
@@ -49,5 +49,3 @@ services:
     command:
       - sh
       - /usr/share/nginx/start.sh
-  
-  
