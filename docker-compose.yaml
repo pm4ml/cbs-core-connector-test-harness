@@ -1,14 +1,13 @@
-version: "3.8"
 networks:
   mojaloop-net:
     name: mojaloop-net
 
 
 services:
-   core-connector: 
+  core-connector: 
     build:
       context: ./src/
-    image: mojaloop/airtel-core-connector:v1.6.0 # edit this line
+    image: mojaloop/mtn-ug-core-connector:v1.22.0 # edit this line
     networks:
       - mojaloop-net
     env_file: .env.example
@@ -18,9 +17,9 @@ services:
 
   TtkBackend:
     networks:
-      - mojaloop-net
+      - mojaloop-net 
     ## TODO: Change the following version to standard version
-    image: mojaloop/ml-testing-toolkit:v15.6.3
+    image: mojaloop/ml-testing-toolkit:v18.7.4
     # image: mojaloop/ml-testing-toolkit:v16.1.0-snapshot.3
     user: root
     volumes:
@@ -39,7 +38,7 @@ services:
       retries: 3
 
   TtkUi:
-    image: mojaloop/ml-testing-toolkit-ui:v15.3.0
+    image: mojaloop/ml-testing-toolkit-ui:v16.1.1
     ports:
       - "6060:6060"
     networks:
@@ -50,80 +49,3 @@ services:
     command:
       - sh
       - /usr/share/nginx/start.sh
-  
-  mojaloop-connector:
-    image: mojaloop/sdk-scheme-adapter:v23.6.0-snapshot.2
-    command:
-    - sh
-    - -c
-    - "yarn start:api-svc"
-    environment:
-      - AUTO_ACCEPT_PARTY=true
-      - AUTO_ACCEPT_QUOTES=true
-      - AUTO_ACCEPT_R2P_PARTY=false
-      - BACKEND_ENDPOINT=sim-backend:4040
-      - CACHE_HOST=redis
-      - CACHE_PORT=6379
-      - CACHE_URL=redis://redis:6379
-      - DFSP_ID=dfsp1
-      - ENABLE_TEST_FEATURES=true
-      - INBOUND_LISTEN_PORT=4000
-      - INBOUND_MUTUAL_TLS_ENABLED=false
-      - IN_CA_CERT_PATH=/secrets/inbound-cacert.pem
-      - IN_SERVER_CERT_PATH=/secrets/inbound-cert.pem
-      - IN_SERVER_KEY_PATH=/secrets/inbound-key.pem
-      - JWS_SIGN=false
-      - JWS_SIGNING_KEY_PATH=/jwsSigningKey.key
-      - JWS_VERIFICATION_KEYS_DIRECTORY=/jwsVerificationKeys
-      - METRICS_SERVER_LISTEN_PORT=4004
-      - MULTIPLE_PARTIES_RESPONSE=false
-      - MGMT_API_WS_URL=management-api
-      - MGMT_API_WS_PORT=4005
-      - OUTBOUND_LISTEN_PORT=4001
-      - OUTBOUND_MUTUAL_TLS_ENABLED=false
-      - OUT_CA_CERT_PATH=/secrets/outbound-cacert.pem
-      - OUT_CLIENT_CERT_PATH=/secrets/outbound-cert.pem
-      - OUT_CLIENT_KEY_PATH=/secrets/outbound-key.pem
-      - PEER_ENDPOINT=TtkBackend:4040
-      - ALS_ENDPOINT=TtkBackend:4040
-      - FX_QUOTES_ENDPOINT=TtkBackend:4040
-      - FX_TRANSFERS_ENPOINT=TtkBackend:4040
-      - TEST_CA_CERT_PATH=/secrets/test-cacert.pem
-      - TEST_CLIENT_CERT_PATH=/secrets/test-cert.pem
-      - TEST_CLIENT_KEY_PATH=/secrets/test-key.pem
-      - TEST_LISTEN_PORT=4002
-      - TEST_MUTUAL_TLS_ENABLED=false
-      - WS_PORT=4003
-      # - OAUTH_TOKEN_ENDPOINT={{ CHANGE BEFORE INSTALL e.g. https://extgw.dev.product.mbox-dev.io:9443/oauth2/token }}
-      # - OAUTH_CLIENT_KEY={{ CHANGE BEFORE INSTALL e.g. k9edbgS09cE9qAkiVEaz5Hmuc5Ua }}
-      # - OAUTH_CLIENT_SECRET={{ CHANGE BEFORE INSTALL e.g. UvMTwwj7am2agjkAfvmElNte4ewa }}
-      - VALIDATE_INBOUND_JWS=false
-      - RESERVE_NOTIFICATION=false
-      # - RESOURCE_VERSIONS="transfers=1.1"
-      - PM4ML_ENABLED=${PM4ML_ENABLED:-false}
-      - ENABLE_BACKEND_EVENT_HANDLER=false
-      - ENABLE_FSPIOP_EVENT_HANDLER=false
-      - FSPIOP_API_SERVER_MAX_REQUEST_BYTES=209715200
-      - BACKEND_API_SERVER_MAX_REQUEST_BYTES=209715200
-      - SUPPORTED_CURRENCIES=TZS
-      - GET_SERVICES_FXP_RESPONSE=testfxp1
-    ports:
-      - "4000:4000"
-      - "4001:4001"
-    volumes:
-      - ./outbound-cacert.pem:/secrets/outbound-cacert.pem
-      - ./outbound-cert.pem:/secrets/outbound-cert.pem
-      - ./outbound-key.pem:/secrets/outbound-key.pem
-      - ./inbound-cacert.pem:/secrets/inbound-cacert.pem
-      - ./inbound-cert.pem:/secrets/inbound-cert.pem
-      - ./inbound-key.pem:/secrets/inbound-key.pem
-      - ./secrets/jwsSigningKey.key:/jwsSigningKey.key
-      - ./secrets/jwsVerificationKeys:/jwsVerificationKeys
-    restart: always
-    depends_on:
-      redis:
-        condition: service_started
-      # management-api:
-      #   condition: service_started
-      # management-api:
-      #   condition: service_healthy

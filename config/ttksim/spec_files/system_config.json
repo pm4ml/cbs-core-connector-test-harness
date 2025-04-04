@@ -173,6 +173,29 @@
       "folderPath": "core-connector-api-spec_1.0",
       "asynchronous": false,
       "additionalApi": true
+    },
+    {
+      "type": "core-connector-api-spec",
+      "version": "1.1",
+      "folderPath": "core-connector-api-spec_1.1",
+      "asynchronous": false,
+      "additionalApi": true
+    },
+    {
+      "type": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2",
+      "version": "2.1",
+      "folderPath": "sdk-scheme-adapter-outbound-v2_1_0-openapi3-snippets-2_2.1",
+      "asynchronous": false,
+      "additionalApi": true,
+      "prefix": "/out"
+    },
+    {
+      "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets-new",
+      "version": "2.1",
+      "folderPath": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets-new_2.1",
+      "asynchronous": false,
+      "additionalApi": true,
+      "prefix": "/sdk-backend-new"
     }
   ],
   "SOCKET_IO_ENGINE_OPTIONS": {
