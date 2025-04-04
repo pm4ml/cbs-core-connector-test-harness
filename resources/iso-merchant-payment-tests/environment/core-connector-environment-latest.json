@@ -1,0 +1,20 @@
+{
+  "inputValues": {
+    "payerId": "56733123450",
+    "amountToSend": "150",
+    "payeeId": "265998571175",
+    "sendCurrency": "UGX",
+    "receiveCurrency": "XXX",
+    "desc": "School Fees",
+    "payeeFspFee": "1.1",
+    "targetAmount": "1500",
+    "payeeReceiveAmount ": "1498.9",
+    "sourceCharge": "1.5",
+    "targetCharge": "15"
+  },
+  "options": {
+    "breakOnError": false,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  }
+}
