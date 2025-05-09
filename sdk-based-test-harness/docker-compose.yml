@@ -194,7 +194,7 @@ services:
       - debug
 
   core-connector1:
-    image: mojaloop/mtn-ug-core-connector:v1.22.0
+    image: mojaloop/mtn-ug-core-connector:v1.22.0.local
     env_file: ./config/core-connector1/config.env
     networks:
       - mojaloop-net
