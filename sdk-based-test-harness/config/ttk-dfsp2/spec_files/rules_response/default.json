@@ -1237,16 +1237,27 @@
       "path": null,
       "params": {
         "body": {
+          "expiration": "2025-05-08T12:01:07.765Z",
+          "extensionList": [
+            {
+              "key": "CdtTrfTxInf.Cdtr.PstlAdr.Ctry",
+              "value": "UG"
+            },
+            {
+              "key": "CdtTrfTxInf.CdtrAgt.FinInstnId.LEI",
+              "value": "529900T8BM49AURSDO55"
+            }
+          ],
+          "payeeFspCommissionAmount": "0",
+          "payeeFspCommissionAmountCurrency": "{$request.body.currency}",
+          "payeeFspFeeAmount": "0",
+          "payeeFspFeeAmountCurrency": "{$request.body.currency}",
+          "payeeReceiveAmount": "{$request.body.amount}",
+          "payeeReceiveAmountCurrency": "{$request.body.currency}",
           "quoteId": "{$request.body.quoteId}",
           "transactionId": "{$request.body.transactionId}",
           "transferAmount": "{$request.body.amount}",
-          "transferAmountCurrency": "{$request.body.currency}",
-          "extensionList": [
-            {
-              "key": "CdtTrfTxInf.Cdtr.CtctDtls.EmailAdr",
-              "value": "sample_payee@email.com"
-            }
-          ]
+          "transferAmountCurrency": "{$request.body.currency}"
         },
         "statusCode": "200",
         "scripts": {
