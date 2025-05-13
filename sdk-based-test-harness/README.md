@@ -16,9 +16,9 @@ To configure the test harness for locally testing a core connector. You will nee
 1. Obtain the core banking system api BASE_URL and make sure it can be accessed from your local machine or mock it using the TTK. 
     - If you are going to mock, ask the developer of the core connector to provide an api specification for the DFSP core banking system API.
 2. Configure the core connector service inside the [`./core-connector.yaml`](./core-connector.yaml)
-3. Set up the appropriate `env` file entries inside the `core-connector.env`
+3. Set up the appropriate `env` file entries inside the [`core-connector.env`](./core-connector.env)
 4. Run the test harness 
-5. Load the test collection `./collections/cc_golden_path.json`
+5. Load the test collection [`./collections/cc_golden_path.json`](./collections/cc_golden_path.json)
 6. Load the environment file 
 7. Run the test cases.
 
