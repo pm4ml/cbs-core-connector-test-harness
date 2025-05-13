@@ -194,13 +194,11 @@ services:
       - debug
 
   core-connector1:
-    image: mojaloop/mtn-ug-core-connector:v1.22.0.local
-    env_file: ./config/core-connector1/config.env
+    extends:
+      file: core-connector.yaml
+      service: core-connector
     networks:
       - mojaloop-net
-    ports:
-      - "13003:3003"
-      - "13004:3004"
 
   core-connector2:
     image: mojaloop/mtn-ug-core-connector:v1.22.0

@@ -1,0 +1,7 @@
+services:
+  core-connector:
+    image: mojaloop/mtn-ug-core-connector:v1.22.0.local # edit this line to set image name
+    env_file: ./core-connector.env 
+    ports:
+      - "13003:3003"
+      - "13004:3004"
