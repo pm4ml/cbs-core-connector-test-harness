@@ -1,6 +1,6 @@
 services:
   core-connector:
-    image: mojaloop/mtn-ug-core-connector:v1.22.0.local # edit this line to set image name
+    image: mojaloop/mtn-ug-core-connector:v1.25.0 # edit this line to set image name
     env_file: ./core-connector.env 
     ports:
       - "13003:3003"
@@ -14,3 +14,4 @@ services:
     ports:
       # Serve the mocked API locally as available on port 8080
       - '18080:4010'
+
