@@ -1,6 +1,23 @@
 # Core Connector Golden Path Test Collection
 The core connector golden path test collection is a set of test cases that are executed against a core connector inside a mojaloop testing toolkit.  The test collection has an accompanying environment file that needs to be in imported into the ttk instance where it is being run such that it can run appropriately.
 
+# Pre-requisites
+- Docker installed
+- 16GB Ram for local runs.
+- Knowledge of docker and compose
+- Internet connection to download images
+
+# Getting Started
+Clone the repository
+```bash
+git clone https://github.com/pm4ml/cbs-core-connector-test-harness.git
+```
+Move into the directory.
+```bash
+cd cbs-core-connector-test-harness
+```
+Follow these instructions while in the `cbs-core-connector-test-harness` folder.
+
 # Running the golden path test collection
 Running the core connector golden path test collection requires configuration of a run environment. Before running the golden path, some prerequisites should be in place.
 
@@ -30,8 +47,30 @@ After configuring the service configuration, you will need to setup the configur
 
 After setting up the service and environment variables, you will then be in position to run the test harness with the core connector to be tested.
 
-## Running locally
+## CAUTION ! Before you run locally
+Before running the test collection locally, make sure to configure the currencies appropriately in the following files.
+ - DFSP 1 SDK [Env file](./config/sdk-dfsp1/api-svc.env) 
+    - Set `SUPPORTED_CURRENCIES=<YOUR-CONNECTOR-CURRENCY>`
+-  FXP 1 SDK [Env file](./config/sdk-fxp1/api-svc.env)
+    - Set `SUPPORTED_CURRENCIES="<YOUR-CONNECTOR-CURRENCY>,XTS"`
+- HUB Input [file](./config/ttk-dfsp1/environments/hub_local_environment.json)
+    - Set  `inputValues.DFSP1_CURRENCY=<YOUR-CONNECTOR-CURRENCY>`
+    - Something like this 
+        ```json
+        {
+            "options": {
+                ...
+            },
+            "inputValues": {
+                ...
+                "DFSP1_CURRENCY": "YOUR-CONNECTOR-CURRENCY>",
+                ...
+            }
+        }
+        ```
+This ensures that the right currencies are returned in the responses to the core connector being tested
 
+## Running locally
 - Make sure you are in `sdk-based-test-harness` directory
 - Run the command `docker compose build`
 - Run the command `docker compose --profile debug up` (wait till all the services are up)

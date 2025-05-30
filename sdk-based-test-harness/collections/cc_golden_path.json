@@ -648,7 +648,7 @@
           "body": {
             "amount": "500",
             "amountType": "SEND",
-            "currency": "ZMW",
+            "currency": "{$environment.incomingCurrency}",
             "from": {
               "idType": "MSISDN",
               "idValue": "978034884"
@@ -699,7 +699,7 @@
             "transferId": "{$function.generic.generateUUID}",
             "amount": "{$environment.payeeAmount}",
             "amountType": "SEND",
-            "currency": "EUR",
+            "currency": "{$environment.incomingCurrency}",
             "from": {
               "idType": "MSISDN",
               "idValue": "777123456"
@@ -1074,7 +1074,7 @@
           "body": {
             "amount": "500",
             "amountType": "SEND",
-            "currency": "ZMW",
+            "currency": "{$environment.incomingCurrency}",
             "from": {
               "idType": "MSISDN",
               "idValue": "978034884"
@@ -1237,28 +1237,29 @@
             ]
           },
           "body": {
-            "amount": "500",
+            "transferId": "{$function.generic.generateUUID}",
+            "amount": "{$environment.payeeAmount}",
             "amountType": "SEND",
-            "currency": "KES",
+            "currency": "ABC",
             "from": {
-              "idType": "IBAN",
-              "idValue": "ZM29934000343343"
+              "idType": "MSISDN",
+              "idValue": "777123456"
             },
             "to": {
-              "idType": "MSISDN",
-              "idValue": "978980797"
+              "idType": "{$environment.payeeIdType}",
+              "idValue": "{$environment.payeeId}"
             },
             "ilpPacket": {
               "data": {
                 "amount": {
-                  "amount": "500",
-                  "currency": "ZMW"
+                  "amount": "400",
+                  "currency": "EUR"
                 },
                 "payee": {
                   "partyIdInfo": {
                     "partyIdType": "MSISDN",
-                    "partyIdentifier": "978980797",
-                    "fspId": "airtel-123-qwerty"
+                    "partyIdentifier": "56733123450",
+                    "fspId": "mtnuganda"
                   },
                   "merchantClassificationCode": "1234",
                   "name": "Payee Name",
@@ -1267,18 +1268,33 @@
                       "firstName": "PayeeFirstName",
                       "lastName": "PayeeLastName"
                     },
-                    "dateOfBirth": "YYYY-MM-DD"
+                    "dateOfBirth": "2001-08-21"
+                  },
+                  "supportedCurrencies": [
+                    "EUR"
+                  ]
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "MSISDN",
+                    "partyIdentifier": "0882997445",
+                    "fspId": "tnmmalawi"
+                  },
+                  "merchantClassificationCode": "1234",
+                  "name": "Payee Name",
+                  "personalInfo": {
+                    "complexName": {
+                      "firstName": "PayeeFirstName",
+                      "lastName": "PayeeLastName"
+                    },
+                    "dateOfBirth": "2001-08-21"
                   },
                   "supportedCurrencies": [
                     "ZMW"
                   ]
                 },
-                "payer": {
-                  "idType": "IBAN",
-                  "idValue": "ZM29934000343343"
-                },
-                "quoteId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
-                "transactionId": "11b4a8d6-728d-49f8-a545-8a23bc62ba86",
+                "quoteId": "2d93d09c-aa9f-411a-ba48-b315dd04d5d8",
+                "transactionId": "25394f6a-aa14-46a2-b28a-35140e842f7d",
                 "transactionType": {
                   "initiator": "PAYER",
                   "initiatorType": "CONSUMER",
@@ -1286,6 +1302,20 @@
                   "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
                 }
               }
+            },
+            "transactionType": "TRANSFER",
+            "quote": {
+              "expiration": "2024-10-15T13:17:57.742Z",
+              "payeeFspCommissionAmount": "0",
+              "payeeFspCommissionAmountCurrency": "MWK",
+              "payeeFspFeeAmount": "0",
+              "payeeFspFeeAmountCurrency": "MWK",
+              "payeeReceiveAmount": "{$environment.payeeAmount}",
+              "payeeReceiveAmountCurrency": "MWK",
+              "quoteId": "1d0a1eae-02de-4bdb-beb5-fb87f200fa4e",
+              "transactionId": "13b362e2-8a73-4e81-a6a1-88cb142cf027",
+              "transferAmount": "{$environment.payeeAmount}",
+              "transferAmountCurrency": "MWK"
             },
             "note": "Transfer Quote Request"
           },
