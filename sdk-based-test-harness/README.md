@@ -14,7 +14,7 @@ git clone https://github.com/pm4ml/cbs-core-connector-test-harness.git
 ```
 Move into the directory.
 ```bash
-cd cbs-core-connector-test-harness
+cd cbs-core-connector-test-harness/sdk-based-test-harness
 ```
 Follow these instructions while in the `cbs-core-connector-test-harness` folder.
 
