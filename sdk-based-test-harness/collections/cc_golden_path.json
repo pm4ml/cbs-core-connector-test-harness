@@ -34,7 +34,7 @@
           "operationPath": "/send-money",
           "path": "/send-money",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3004",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -103,7 +103,7 @@
           "operationPath": "/send-money",
           "path": "/send-money",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -157,7 +157,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": true,
             "homeTransactionId": "HTX123456789"
@@ -203,7 +203,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": false,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
@@ -242,7 +242,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url": "{$inputs.cc_outgoiing_url}",
           "body": {
             "acceptRuote": true,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
@@ -261,7 +261,7 @@
           "disabled": false
         },
         {
-          "id": 11,
+          "id": 6,
           "description": "Requesting Transactions Status is functioning",
           "apiVersion": {
             "minorVersion": 0,
@@ -281,7 +281,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "tests": {
             "assertions": [
               {
@@ -325,7 +325,7 @@
           "operationPath": "/merchant-payment",
           "path": "/merchant-payment",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -398,7 +398,7 @@
           "operationPath": "/merchant-payment",
           "path": "/merchant-payment",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -452,7 +452,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": true,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -498,7 +498,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -537,7 +537,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptqote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -576,7 +576,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptqote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -615,7 +615,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "http://{$environment.connectorHost}:3004",
+          "url":  "{$inputs.cc_outgoing_url}",
           "tests": {
             "assertions": [
               {
@@ -657,13 +657,13 @@
             "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
           },
           "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/MSISDN/978980797",
+          "path": "/parties/{IdType}/{ID}",
           "method": "get",
           "params": {
-            "ID": "978980797",
-            "IdType": "MSISDN"
+            "ID": "{$inputs.payeeId}",
+            "IdType": "{$inputs.payeeIdType}"
           },
-          "url": "http://{$environment.connectorHost}:3003",
+          "url":  "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -693,13 +693,13 @@
             "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
           },
           "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/IBAN/978980797",
+          "path": "/parties/{IdType}/{ID}",
           "method": "get",
           "params": {
-            "ID": "978980797",
-            "IdType": "IBAN"
+            "ID": "{$inputs.payeeId}",
+            "IdType": "{$inputs.invalidIdType}"
           },
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -729,13 +729,13 @@
             "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
           },
           "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/IBAN/978980797",
+          "path": "/parties/{IdType}/{ID}",
           "method": "get",
           "params": {
-            "ID": "978980797",
-            "IdType": "IBAN"
+            "ID": "{$inputs.payeeIdNotFound}",
+            "IdType": "{$inputs.payeeIdType}"
           },
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -767,7 +767,7 @@
           "operationPath": "/quoterequests",
           "path": "/quoterequests",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -800,7 +800,7 @@
           "operationPath": "/quoterequests",
           "path": "/quoterequests",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -820,21 +820,21 @@
             ]
           },
           "body": {
-            "amount": "500",
+            "amount": "{$inputs.sendAmount}",
             "amountType": "SEND",
-            "currency": "ZMW",
+            "currency": "{$inputs.sendCurrency}",
             "from": {
-              "idType": "MSISDN",
-              "idValue": "978034884"
+              "idType": "{$inputs.payeeIdType}",
+              "idValue": "{$inputs.payerId}"
             },
             "initiator": "PAYER",
             "initiatorType": "CONSUMER",
-            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
+            "quoteId": "{$function.generic.generateUUID}",
             "to": {
-              "idType": "IBAN",
-              "idValue": "978980797"
+              "idType": "{$inputs.invalidIdType}",
+              "idValue": "{$inputs.payeeId}"
             },
-            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
+            "transactionId": "{$function.generic.generateUUID}",
             "transactionType": "TRANSFER"
           },
           "disabled": false
@@ -857,7 +857,7 @@
           "operationPath": "/quoterequests",
           "path": "/quoterequests",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -877,77 +877,27 @@
             ]
           },
           "body": {
-            "amount": "500",
+            "amount": "{$inputs.sendAmount}",
             "amountType": "SEND",
-            "currency": "KES",
+            "currency": "{$inputs.invalidCurrency}",
             "from": {
-              "idType": "MSISDN",
-              "idValue": "978034884"
+              "idType": "{$inputs.payeeIdType}",
+              "idValue": "{$inputs.payerId}"
             },
             "initiator": "PAYER",
             "initiatorType": "CONSUMER",
-            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
+            "quoteId": "{$function.generic.generateUUID}",
             "to": {
-              "idType": "MSISDN",
-              "idValue": "978980797"
+              "idType": "{$inputs.invalidIdType}",
+              "idValue": "{$inputs.payeeId}"
             },
-            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
+            "transactionId": "{$function.generic.generateUUID}",
             "transactionType": "TRANSFER"
           },
           "disabled": false
         },
         {
           "id": 7,
-          "description": "Invalid Quote Request Rejected Test - Blocked Account Quote Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/quoterequests",
-          "path": "/quoterequests",
-          "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check if response status code is 500",
-                "exec": [
-                  "expect(response.status).to.equal(500)"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "amount": "500",
-            "amountType": "SEND",
-            "currency": "{$environment.incomingCurrency}",
-            "from": {
-              "idType": "MSISDN",
-              "idValue": "978034884"
-            },
-            "initiator": "PAYER",
-            "initiatorType": "CONSUMER",
-            "quoteId": "2fc138a2-0a8f-4e4e-a39b-f881e08cab65",
-            "to": {
-              "idType": "MSISDN",
-              "idValue": "{$environment.payeeIdNotFound}"
-            },
-            "transactionId": "6b73953f-f4b5-4029-8011-72ab0f4f8e23",
-            "transactionType": "TRANSFER"
-          },
-          "disabled": false
-        },
-        {
-          "id": 8,
           "description": "Bad Transfer Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -964,7 +914,7 @@
           "operationPath": "/transfers",
           "path": "/transfers",
           "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -978,12 +928,12 @@
           },
           "body": {
             "transferId": "{$function.generic.generateUUID}",
-            "amount": "{$environment.payeeAmount}",
+            "amount": "{$inputs.payeeAmount}",
             "amountType": "SEND",
-            "currency": "EUR",
+            "currency": "{$inputs.sendCurrency}",
             "from": {
-              "idType": "MSISDN",
-              "idValue": "777123456"
+              "idType": "{$inputs.payeeIdType}",
+              "idValue": "{$inputs.payeeIdType}"
             },
             "to": {
               "idType": "{$environment.invalidIdType}",
@@ -992,14 +942,14 @@
             "ilpPacket": {
               "data": {
                 "amount": {
-                  "amount": "400",
-                  "currency": "EUR"
+                  "amount": "{$inputs.payeeAmount}",
+                  "currency": "{$inputs.sendCurrency}"
                 },
                 "payee": {
                   "partyIdInfo": {
-                    "partyIdType": "MSISDN",
-                    "partyIdentifier": "56733123450",
-                    "fspId": "mtnuganda"
+                    "partyIdType": "{$inputs.payeeIdType}",
+                    "partyIdentifier": "{$environment.payeeId}",
+                    "fspId": "{$inputs.payeeFspId}"
                   },
                   "merchantClassificationCode": "1234",
                   "name": "Payee Name",
