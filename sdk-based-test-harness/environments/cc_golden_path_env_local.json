@@ -22,8 +22,8 @@
     "connectorHost": "core-connector1",
     "incomingCurrency": "ZMW",
     "invalidCurrency": "XXX",
-    "cc_outgoing_url": "core-connector1",
-    "cc_incoming_url": "core-connector1"
+    "cc_outgoing_url": "http://core-connector1:3004",
+    "cc_incoming_url": "http://core-connector1:3003"
   },
   "options": {
     "breakOnError": false,
