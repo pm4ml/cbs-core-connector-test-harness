@@ -206,12 +206,3 @@ services:
       service: core-connector
     networks:
       - mojaloop-net
-
-  core-connector2:
-    image: mojaloop/mtn-ug-core-connector:v1.22.0
-    env_file: ./config/core-connector2/config.env
-    networks:
-      - mojaloop-net
-    ports:
-      - "23003:3003"
-      - "23004:3004"
