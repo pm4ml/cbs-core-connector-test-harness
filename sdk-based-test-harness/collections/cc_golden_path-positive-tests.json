@@ -379,527 +379,86 @@
             ]
           },
           "disabled": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Identifier Uploads Happy Path",
+      "fileInfo": {
+        "path": "cc_golden_path.json"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /accounts",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/accounts",
+          "path": "/accounts",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": [
+            {
+              "idType": "{$environment.payeeIdType}",
+              "idValue": "{$environment.payeeId}"
+            }
+          ],
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          }
         },
         {
           "id": 2,
-          "description": "Invalid Discovery Request Rejected Test",
+          "description": "DELETE /accounts/{IdType}/{IdValue}",
           "apiVersion": {
-            "minorVersion": 1,
+            "minorVersion": 0,
             "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "type": "send-money-api",
             "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
           },
-          "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/{IdType}/{ID}",
-          "method": "get",
+          "operationPath": "/accounts/{Type}/{ID}",
+          "path": "/accounts/{$environment.payeeIdType}/{$environment.payeeId}",
+          "method": "delete",
           "params": {
-            "ID": "{$inputs.payeeId}",
-            "IdType": "{$inputs.invalidIdType}"
+            "Type": "{$environment.payeeIdType}",
+            "ID": "{$environment.payeeId}"
           },
-          "url": "{$inputs.cc_incoming_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "tests": {
             "assertions": [
               {
                 "id": 1,
-                "description": "Check status code is 400",
+                "description": "expect response status to be 200",
                 "exec": [
-                  "expect(response.status).to.equal(400)"
+                  "expect(response.status).to.equal(200)"
                 ]
               }
             ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 3,
-          "description": "Non-existing Party Discovery Response Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/{IdType}/{ID}",
-          "method": "get",
-          "params": {
-            "ID": "{$inputs.payeeIdNotFound}",
-            "IdType": "{$inputs.payeeIdType}"
-          },
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 4,
-          "description": "Invalid Quote Request Rejected Test - Missing Fields Quote Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/quoterequests",
-          "path": "/quoterequests",
-          "method": "post",
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "body": {},
-          "disabled": false
-        },
-        {
-          "id": 5,
-          "description": "Invalid Quote Request Rejected Test - Invalid Id Type Quote Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/quoterequests",
-          "path": "/quoterequests",
-          "method": "post",
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check if Status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check that Mojaloop status code is 3100",
-                "exec": [
-                  "expect(response.body.status).to.equal(\"3100\")"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "amount": "{$inputs.sendAmount}",
-            "amountType": "SEND",
-            "currency": "{$inputs.sendCurrency}",
-            "from": {
-              "idType": "{$inputs.payeeIdType}",
-              "idValue": "{$inputs.payerId}"
-            },
-            "initiator": "PAYER",
-            "initiatorType": "CONSUMER",
-            "quoteId": "{$function.generic.generateUUID}",
-            "to": {
-              "idType": "{$inputs.invalidIdType}",
-              "idValue": "{$inputs.payeeId}"
-            },
-            "transactionId": "{$function.generic.generateUUID}",
-            "transactionType": "TRANSFER"
-          },
-          "disabled": false
-        },
-        {
-          "id": 6,
-          "description": "Invalid Quote Request Rejected Test - Unsupported Currency Quote Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/quoterequests",
-          "path": "/quoterequests",
-          "method": "post",
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check that response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check that Mojaloop status code is 5106",
-                "exec": [
-                  "expect(response.body.status).to.equal(\"5106\")"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "amount": "{$inputs.sendAmount}",
-            "amountType": "SEND",
-            "currency": "{$inputs.invalidCurrency}",
-            "from": {
-              "idType": "{$inputs.payeeIdType}",
-              "idValue": "{$inputs.payerId}"
-            },
-            "initiator": "PAYER",
-            "initiatorType": "CONSUMER",
-            "quoteId": "{$function.generic.generateUUID}",
-            "to": {
-              "idType": "{$inputs.invalidIdType}",
-              "idValue": "{$inputs.payeeId}"
-            },
-            "transactionId": "{$function.generic.generateUUID}",
-            "transactionType": "TRANSFER"
-          },
-          "disabled": false
-        },
-        {
-          "id": 7,
-          "description": "Bad Transfer Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/transfers",
-          "path": "/transfers",
-          "method": "post",
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check if Status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "transferId": "{$function.generic.generateUUID}",
-            "amount": "{$inputs.payeeAmount}",
-            "amountType": "SEND",
-            "currency": "{$inputs.sendCurrency}",
-            "from": {
-              "idType": "{$inputs.payeeIdType}",
-              "idValue": "{$inputs.payeeIdType}"
-            },
-            "to": {
-              "idType": "{$environment.invalidIdType}",
-              "idValue": "{$environment.payeeId}"
-            },
-            "ilpPacket": {
-              "data": {
-                "amount": {
-                  "amount": "{$inputs.payeeAmount}",
-                  "currency": "{$inputs.sendCurrency}"
-                },
-                "payee": {
-                  "partyIdInfo": {
-                    "partyIdType": "{$inputs.payeeIdType}",
-                    "partyIdentifier": "{$environment.payeeId}",
-                    "fspId": "{$inputs.payeeFspId}"
-                  },
-                  "merchantClassificationCode": "1234",
-                  "name": "Payee Name",
-                  "personalInfo": {
-                    "complexName": {
-                      "firstName": "PayeeFirstName",
-                      "lastName": "PayeeLastName"
-                    },
-                    "dateOfBirth": "2001-08-21"
-                  },
-                  "supportedCurrencies": [
-                    "EUR"
-                  ]
-                },
-                "payer": {
-                  "partyIdInfo": {
-                    "partyIdType": "MSISDN",
-                    "partyIdentifier": "0882997445",
-                    "fspId": "tnmmalawi"
-                  },
-                  "merchantClassificationCode": "1234",
-                  "name": "Payee Name",
-                  "personalInfo": {
-                    "complexName": {
-                      "firstName": "PayeeFirstName",
-                      "lastName": "PayeeLastName"
-                    },
-                    "dateOfBirth": "2001-08-21"
-                  },
-                  "supportedCurrencies": [
-                    "ZMW"
-                  ]
-                },
-                "quoteId": "2d93d09c-aa9f-411a-ba48-b315dd04d5d8",
-                "transactionId": "25394f6a-aa14-46a2-b28a-35140e842f7d",
-                "transactionType": {
-                  "initiator": "PAYER",
-                  "initiatorType": "CONSUMER",
-                  "scenario": "TRANSFER",
-                  "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
-                }
-              }
-            },
-            "transactionType": "TRANSFER",
-            "quote": {
-              "expiration": "2024-10-15T13:17:57.742Z",
-              "payeeFspCommissionAmount": "0",
-              "payeeFspCommissionAmountCurrency": "MWK",
-              "payeeFspFeeAmount": "0",
-              "payeeFspFeeAmountCurrency": "MWK",
-              "payeeReceiveAmount": "{$environment.payeeAmount}",
-              "payeeReceiveAmountCurrency": "MWK",
-              "quoteId": "1d0a1eae-02de-4bdb-beb5-fb87f200fa4e",
-              "transactionId": "13b362e2-8a73-4e81-a6a1-88cb142cf027",
-              "transferAmount": "{$environment.payeeAmount}",
-              "transferAmountCurrency": "MWK"
-            },
-            "note": "Transfer Quote Request"
-          },
-          "disabled": false
-        },
-        {
-          "id": 9,
-          "description": "Unsupported Currency Transfer Request Rejected Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/transfers",
-          "path": "/transfers",
-          "method": "post",
-          "url": "http://{$environment.connectorHost}:3003",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check if Status Code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "transferId": "{$function.generic.generateUUID}",
-            "amount": "{$environment.payeeAmount}",
-            "amountType": "SEND",
-            "currency": "ABC",
-            "from": {
-              "idType": "MSISDN",
-              "idValue": "777123456"
-            },
-            "to": {
-              "idType": "{$environment.payeeIdType}",
-              "idValue": "{$environment.payeeId}"
-            },
-            "ilpPacket": {
-              "data": {
-                "amount": {
-                  "amount": "400",
-                  "currency": "EUR"
-                },
-                "payee": {
-                  "partyIdInfo": {
-                    "partyIdType": "MSISDN",
-                    "partyIdentifier": "56733123450",
-                    "fspId": "mtnuganda"
-                  },
-                  "merchantClassificationCode": "1234",
-                  "name": "Payee Name",
-                  "personalInfo": {
-                    "complexName": {
-                      "firstName": "PayeeFirstName",
-                      "lastName": "PayeeLastName"
-                    },
-                    "dateOfBirth": "2001-08-21"
-                  },
-                  "supportedCurrencies": [
-                    "EUR"
-                  ]
-                },
-                "payer": {
-                  "partyIdInfo": {
-                    "partyIdType": "MSISDN",
-                    "partyIdentifier": "0882997445",
-                    "fspId": "tnmmalawi"
-                  },
-                  "merchantClassificationCode": "1234",
-                  "name": "Payee Name",
-                  "personalInfo": {
-                    "complexName": {
-                      "firstName": "PayeeFirstName",
-                      "lastName": "PayeeLastName"
-                    },
-                    "dateOfBirth": "2001-08-21"
-                  },
-                  "supportedCurrencies": [
-                    "ZMW"
-                  ]
-                },
-                "quoteId": "2d93d09c-aa9f-411a-ba48-b315dd04d5d8",
-                "transactionId": "25394f6a-aa14-46a2-b28a-35140e842f7d",
-                "transactionType": {
-                  "initiator": "PAYER",
-                  "initiatorType": "CONSUMER",
-                  "scenario": "TRANSFER",
-                  "subScenario": "LOCALLY_DEFINED_SUBSCENARIO"
-                }
-              }
-            },
-            "transactionType": "TRANSFER",
-            "quote": {
-              "expiration": "2024-10-15T13:17:57.742Z",
-              "payeeFspCommissionAmount": "0",
-              "payeeFspCommissionAmountCurrency": "MWK",
-              "payeeFspFeeAmount": "0",
-              "payeeFspFeeAmountCurrency": "MWK",
-              "payeeReceiveAmount": "{$environment.payeeAmount}",
-              "payeeReceiveAmountCurrency": "MWK",
-              "quoteId": "1d0a1eae-02de-4bdb-beb5-fb87f200fa4e",
-              "transactionId": "13b362e2-8a73-4e81-a6a1-88cb142cf027",
-              "transferAmount": "{$environment.payeeAmount}",
-              "transferAmountCurrency": "MWK"
-            },
-            "note": "Transfer Quote Request"
-          },
-          "disabled": false
-        },
-        {
-          "id": 10,
-          "description": "Aborting a Transfer Request Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/transfers/{transferId}",
-          "path": "/transfers/{transferId}",
-          "method": "put",
-          "params": {
-            "transferId": ""
-          },
-          "url": "http://{$environment.connectorHost}:3003",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check if status code is 500",
-                "exec": [
-                  "expect(response.status).to.equal(500)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check if response message is equal to ERROR_OCCURRED",
-                "exec": [
-                  "expect(response.body.message).to.equal(\"Transfer Not Completed Error\")"
-                ]
-              }
-            ]
-          },
-          "body": {
-            "currentState": "ERROR_OCCURRED",
-            "transferId": "{$function.generic.generateUUID}",
-            "quoteRequest": {
-              "body": {
-                "quoteId": "{$function.generic.generateUUID}",
-                "transactionId": "{$function.generic.generateUUID}",
-                "payee": {
-                  "partyIdInfo": {
-                    "partyIdType": "{$environment.payeeIdType}",
-                    "partyIdentifier": "{$environment.payeeId}"
-                  }
-                },
-                "payer": {
-                  "partyIdInfo": {
-                    "partyIdType": "MSISDN",
-                    "partyIdentifier": "{$environment.payerId}"
-                  }
-                },
-                "amountType": "SEND",
-                "amount": {
-                  "currency": "{$environment.receiveCurrency}",
-                  "amount": "{$environment.payeeAmount}"
-                },
-                "transactionType": {
-                  "scenario": "DEPOSIT",
-                  "initiator": "PAYER",
-                  "initiatorType": "CONSUMER"
-                }
-              }
-            }
           },
           "disabled": false
         }

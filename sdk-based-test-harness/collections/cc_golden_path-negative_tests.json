@@ -17,8 +17,59 @@
       },
       "requests": [
         {
-          "id": 1,
-          "description": "Successful Transfer Test",
+          "id": 2,
+          "description": "Bad Requests are Rejected Test",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$environment.payeeId}",
+            "payeeIdType": "{$environment.payeeIdType}",
+            "sendCurrency": "{$environment.sendCurrency}",
+            "receiveCurrency": "{$environment.receiveCurrency}",
+            "purposeCode": "{$environment.sendMoneyPurposeCode}",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$environment.payerName}",
+              "payerId": "{$environment.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$environment.payerDOB}",
+                "PrvcOfBirth": "{$environment.payerPrvncOB}",
+                "CityOfBirth": "{$environment.payerCityOB}",
+                "CtryOfBirth": "{$environment.payerCtryOB}"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 2,
+          "description": "Bad Quotes are Rejected Test - send-money",
           "apiVersion": {
             "minorVersion": 0,
             "majorVersion": 2,
@@ -86,105 +137,8 @@
           }
         },
         {
-          "id": 2,
-          "description": "Bad Requests are Rejected Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money",
-          "path": "/send-money",
-          "method": "post",
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "homeTransactionId": "{$function.generic.generateUUID}",
-            "payeeId": "{$environment.payeeId}",
-            "payeeIdType": "{$environment.payeeIdType}",
-            "sendCurrency": "{$environment.sendCurrency}",
-            "receiveCurrency": "{$environment.receiveCurrency}",
-            "purposeCode": "{$environment.sendMoneyPurposeCode}",
-            "transactionType": "TRANSFER",
-            "payer": {
-              "name": "{$environment.payerName}",
-              "payerId": "{$environment.payerId}",
-              "DateAndPlaceOfBirth": {
-                "BirthDt": "{$environment.payerDOB}",
-                "PrvcOfBirth": "{$environment.payerPrvncOB}",
-                "CityOfBirth": "{$environment.payerCityOB}",
-                "CtryOfBirth": "{$environment.payerCtryOB}"
-              }
-            }
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
           "id": 3,
-          "description": "Good Quotes are Accepted Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/{$environment.sendTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptQuote": true,
-            "homeTransactionId": "HTX123456789"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check response body should contain transferId",
-                "exec": [
-                  "expect(response.body.transferId).not.to.equal(undefined)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 4,
-          "description": "Bad Quotes are Rejected Test",
+          "description": "Bad Quotes are Rejected Test - acceptQuote",
           "apiVersion": {
             "minorVersion": 0,
             "majorVersion": 2,
@@ -254,332 +208,6 @@
                 "description": "Check response status code is 400",
                 "exec": [
                   "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 6,
-          "description": "Requesting Transactions Status is functioning",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/transfers/{transferId}",
-          "path": "/transfers/{$environment.sendTransferId}",
-          "method": "get",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "name": "Outgoing P2P use case",
-      "fileInfo": {
-        "path": "cc_golden_path.json"
-      },
-      "meta": {
-        "info": "Outgoing P2P use case"
-      },
-      "requests": [
-        {
-          "id": 1,
-          "description": "Successful Transfer Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money",
-          "path": "/send-money",
-          "method": "post",
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "homeTransactionId": "{$function.generic.generateUUID}",
-            "payeeId": "{$environment.payeeId}",
-            "payeeIdType": "{$environment.payeeIdType}",
-            "sendAmount": "{$environment.sendAmount}",
-            "sendCurrency": "{$environment.sendCurrency}",
-            "receiveCurrency": "{$environment.receiveCurrency}",
-            "purposeCode": "{$environment.sendMoneyPurposeCode}",
-            "transactionType": "TRANSFER",
-            "payer": {
-              "name": "{$environment.payerName}",
-              "payerId": "{$environment.payerId}",
-              "DateAndPlaceOfBirth": {
-                "BirthDt": "{$environment.payerDOB}",
-                "PrvcOfBirth": "{$environment.payerPrvncOB}",
-                "CityOfBirth": "{$environment.payerCityOB}",
-                "CtryOfBirth": "{$environment.payerCtryOB}"
-              }
-            }
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check transactionId is present in response",
-                "exec": [
-                  "expect(response.body.transactionId).not.to.equal(undefined)"
-                ]
-              }
-            ]
-          },
-          "disabled": false,
-          "scriptingEngine": "javascript",
-          "scripts": {
-            "postRequest": {
-              "exec": [
-                "environment.sendTransferId = response.body.transactionId",
-                "",
-                ""
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "description": "Bad Requests are Rejected Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money",
-          "path": "/send-money",
-          "method": "post",
-          "url":  "{$inputs.cc_outgoing_url}",
-          "body": {
-            "homeTransactionId": "{$function.generic.generateUUID}",
-            "payeeId": "{$environment.payeeId}",
-            "payeeIdType": "{$environment.payeeIdType}",
-            "sendCurrency": "{$environment.sendCurrency}",
-            "receiveCurrency": "{$environment.receiveCurrency}",
-            "purposeCode": "{$environment.sendMoneyPurposeCode}",
-            "transactionType": "TRANSFER",
-            "payer": {
-              "name": "{$environment.payerName}",
-              "payerId": "{$environment.payerId}",
-              "DateAndPlaceOfBirth": {
-                "BirthDt": "{$environment.payerDOB}",
-                "PrvcOfBirth": "{$environment.payerPrvncOB}",
-                "CityOfBirth": "{$environment.payerCityOB}",
-                "CtryOfBirth": "{$environment.payerCtryOB}"
-              }
-            }
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 3,
-          "description": "Good Quotes are Accepted Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/{$environment.sendTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url":  "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptQuote": true,
-            "homeTransactionId": "HTX123456789"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check response body should contain transferId",
-                "exec": [
-                  "expect(response.body.transferId).not.to.equal(undefined)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 4,
-          "description": "Bad Quotes are Rejected Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/{$environment.sendTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url":  "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptQuote": false,
-            "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 500",
-                "exec": [
-                  "expect(response.status).to.equal(500)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 5,
-          "description": "Timedout Transactions are refunded Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/{$environment.sendTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url": "{$inputs.cc_outgoiing_url}",
-          "body": {
-            "acceptRuote": true,
-            "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 6,
-          "description": "Requesting Transactions Status is functioning",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/transfers/{transferId}",
-          "path": "/transfers/{$environment.sendTransferId}",
-          "method": "get",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url":  "{$inputs.cc_outgoing_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
                 ]
               }
             ]
@@ -600,7 +228,58 @@
       "requests": [
         {
           "id": 1,
-          "description": "Successful Transfer Test",
+          "description": "Bad Requests are Rejected Test",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/merchant-payment",
+          "path": "/merchant-payment",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$environment.payeeId}",
+            "payeeIdType": "{$environment.payeeIdType}",
+            "sendCurrency": "{$environment.sendCurrency}",
+            "receiveCurrency": "{$environment.receiveCurrency}",
+            "purposeCode": "{$environment.sendMoneyPurposeCode}",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$environment.payerName}",
+              "payerId": "{$environment.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$environment.payerDOB}",
+                "PrvcOfBirth": "{$environment.payerPrvncOB}",
+                "CityOfBirth": "{$environment.payerCityOB}",
+                "CtryOfBirth": "{$environment.payerCtryOB}"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 1,
+          "description": "Bad Quotes are Rejected Test - merchant-payment",
           "apiVersion": {
             "minorVersion": 0,
             "majorVersion": 2,
@@ -672,105 +351,8 @@
           }
         },
         {
-          "id": 2,
-          "description": "Bad Requests are Rejected Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/merchant-payment",
-          "path": "/merchant-payment",
-          "method": "post",
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "homeTransactionId": "{$function.generic.generateUUID}",
-            "payeeId": "{$environment.payeeId}",
-            "payeeIdType": "{$environment.payeeIdType}",
-            "sendCurrency": "{$environment.sendCurrency}",
-            "receiveCurrency": "{$environment.receiveCurrency}",
-            "purposeCode": "{$environment.sendMoneyPurposeCode}",
-            "transactionType": "TRANSFER",
-            "payer": {
-              "name": "{$environment.payerName}",
-              "payerId": "{$environment.payerId}",
-              "DateAndPlaceOfBirth": {
-                "BirthDt": "{$environment.payerDOB}",
-                "PrvcOfBirth": "{$environment.payerPrvncOB}",
-                "CityOfBirth": "{$environment.payerCityOB}",
-                "CtryOfBirth": "{$environment.payerCtryOB}"
-              }
-            }
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
           "id": 3,
-          "description": "Good Quotes are Accepted Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/merchant-payment/{transferId}",
-          "path": "/merchant-payment/{$environment.merchantTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.merchantTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptQuote": true,
-            "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check response body should contain transferId",
-                "exec": [
-                  "expect(response.body.transferId).not.to.equal(undefined)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 4,
-          "description": "Bad Quotes are Rejected Test",
+          "description": "Bad Quotes are Rejected Test - acceptQuote",
           "apiVersion": {
             "minorVersion": 0,
             "majorVersion": 2,
@@ -808,7 +390,7 @@
           "disabled": false
         },
         {
-          "id": 5,
+          "id": 4,
           "description": "Timedout Transactions are refunded Test",
           "apiVersion": {
             "minorVersion": 0,
@@ -847,7 +429,7 @@
           "disabled": false
         },
         {
-          "id": 6,
+          "id": 5,
           "description": "Aborted Transactions are refunded Test",
           "apiVersion": {
             "minorVersion": 0,
@@ -884,41 +466,6 @@
             ]
           },
           "disabled": false
-        },
-        {
-          "id": 7,
-          "description": "Requesting Transactions Status is functioning",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/transfers/{transferId}",
-          "path": "/transfers/{$environment.sendTransferId}",
-          "method": "get",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
         }
       ]
     },
@@ -934,42 +481,6 @@
       "requests": [
         {
           "id": 1,
-          "description": "Successful Discovery Test",
-          "apiVersion": {
-            "minorVersion": 1,
-            "majorVersion": 2,
-            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
-            "asynchronous": false,
-            "prefix": "/backend",
-            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
-          },
-          "operationPath": "/parties/{IdType}/{ID}",
-          "path": "/parties/{IdType}/{ID}",
-          "method": "get",
-          "params": {
-            "ID": "{$inputs.payeeId}",
-            "IdType": "{$inputs.payeeIdType}"
-          },
-          "url": "{$inputs.cc_incoming_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code should be 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 2,
           "description": "Invalid Discovery Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1005,7 +516,7 @@
           "disabled": false
         },
         {
-          "id": 3,
+          "id": 2,
           "description": "Non-existing Party Discovery Response Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1041,7 +552,7 @@
           "disabled": false
         },
         {
-          "id": 4,
+          "id": 3,
           "description": "Invalid Quote Request Rejected Test - Missing Fields Quote Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1074,7 +585,7 @@
           "disabled": false
         },
         {
-          "id": 5,
+          "id": 4,
           "description": "Invalid Quote Request Rejected Test - Invalid Id Type Quote Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1131,7 +642,7 @@
           "disabled": false
         },
         {
-          "id": 6,
+          "id": 5,
           "description": "Invalid Quote Request Rejected Test - Unsupported Currency Quote Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1188,7 +699,7 @@
           "disabled": false
         },
         {
-          "id": 7,
+          "id": 6,
           "description": "Bad Transfer Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1303,7 +814,7 @@
           "disabled": false
         },
         {
-          "id": 9,
+          "id": 7,
           "description": "Unsupported Currency Transfer Request Rejected Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1418,7 +929,7 @@
           "disabled": false
         },
         {
-          "id": 10,
+          "id": 8,
           "description": "Aborting a Transfer Request Test",
           "apiVersion": {
             "minorVersion": 1,
@@ -1495,88 +1006,6 @@
     },
     {
       "id": 4,
-      "name": "Identifier Uploads Happy Path",
-      "fileInfo": {
-        "path": "cc_golden_path.json"
-      },
-      "requests": [
-        {
-          "id": 1,
-          "description": "POST /accounts",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/accounts",
-          "path": "/accounts",
-          "method": "post",
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": [
-            {
-              "idType": "{$environment.payeeIdType}",
-              "idValue": "{$environment.payeeId}"
-            }
-          ],
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "expect response status to be 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "id": 2,
-          "description": "DELETE /accounts/{IdType}/{IdValue}",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/accounts/{Type}/{ID}",
-          "path": "/accounts/{$environment.payeeIdType}/{$environment.payeeId}",
-          "method": "delete",
-          "params": {
-            "Type": "{$environment.payeeIdType}",
-            "ID": "{$environment.payeeId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "expect response status to be 200",
-                "exec": [
-                  "expect(response.status).to.equal(200)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        }
-      ]
-    },
-    {
-      "id": 5,
       "name": "Identifier Uploads Non Happy Path",
       "fileInfo": {
         "path": "cc_golden_path.json"
