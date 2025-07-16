@@ -1,6 +1,6 @@
 services:
   core-connector:
-    image: mojaloop/mtn-ug-core-connector:v1.25.0 # edit this line to set image name
+    image: infitx/tnm-mw-core-connector:v1.1.3 # edit this line to set image name
     env_file: ./core-connector.env 
     ports:
       - "13003:3003"
