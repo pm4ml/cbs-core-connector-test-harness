@@ -103,7 +103,7 @@
           "operationPath": "/send-money",
           "path": "/send-money",
           "method": "post",
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -157,7 +157,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": true,
             "homeTransactionId": "HTX123456789"
@@ -203,7 +203,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": false,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
@@ -242,7 +242,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url": "{$inputs.cc_outgoiing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptRuote": true,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
@@ -281,7 +281,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "tests": {
             "assertions": [
               {
@@ -616,7 +616,7 @@
           "operationPath": "/merchant-payment",
           "path": "/merchant-payment",
           "method": "post",
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -689,7 +689,7 @@
           "operationPath": "/merchant-payment",
           "path": "/merchant-payment",
           "method": "post",
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
             "payeeId": "{$environment.payeeId}",
@@ -743,7 +743,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": true,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -789,7 +789,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptQuote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -828,7 +828,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptqote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -867,7 +867,7 @@
           "params": {
             "transferId": "{$environment.merchantTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "acceptqote": false,
             "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
@@ -906,7 +906,7 @@
           "params": {
             "transferId": "{$environment.sendTransferId}"
           },
-          "url":  "{$inputs.cc_outgoing_url}",
+          "url": "{$inputs.cc_outgoing_url}",
           "tests": {
             "assertions": [
               {
@@ -954,7 +954,7 @@
             "ID": "{$inputs.payeeId}",
             "IdType": "{$inputs.payeeIdType}"
           },
-          "url":  "{$inputs.cc_incoming_url}",
+          "url": "{$inputs.cc_incoming_url}",
           "tests": {
             "assertions": [
               {
@@ -1490,6 +1490,137 @@
             }
           },
           "disabled": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Identifier Uploads Happy Path",
+      "fileInfo": {
+        "path": "cc_golden_path.json"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /accounts",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/accounts",
+          "path": "/accounts",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": [
+            {
+              "idType": "{$environment.payeeIdType}",
+              "idValue": "{$environment.payeeId}"
+            }
+          ],
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "DELETE /accounts/{IdType}/{IdValue}",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/accounts/{Type}/{ID}",
+          "path": "/accounts/{$environment.payeeIdType}/{$environment.payeeId}",
+          "method": "delete",
+          "params": {
+            "Type": "{$environment.payeeIdType}",
+            "ID": "{$environment.payeeId}"
+          },
+          "url": "{$inputs.cc_outgoing_url}",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Identifier Uploads Non Happy Path",
+      "fileInfo": {
+        "path": "cc_golden_path.json"
+      },
+      "meta": {
+        "info": "Identifier Uploads Happy Path Copy"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /accounts Bad Request",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/accounts",
+          "path": "/accounts",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": [
+            {
+              "idType": "{$environment.payeeIdType}",
+              "idVaue": "{$environment.payeeId}"
+            }
+          ],
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          }
         }
       ]
     }

@@ -367,5 +367,167 @@
     },
     "type": "response",
     "version": 1
+  },
+  {
+    "ruleId": 8,
+    "priority": 1,
+    "description": "POST /participants",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 2,
+      "type": "iso20022",
+      "asynchronous": true,
+      "specFile": "spec_files/api_definitions/fspiop_2.0_iso20022/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/fspiop_2.0_iso20022/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/fspiop_2.0_iso20022/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/fspiop_2.0_iso20022/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/fspiop_2.0_iso20022/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/participants"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "scripts": {
+          "exec": [
+            "const outEndpoint = userConfig.ENDPOINTS_DFSP_WISE.dfsps.dfsp1.defaultEndpoint;",
+            "const { body, url} = request;",
+            "const putTransfersPath = url.path;",
+            "const requestId = JSON.parse(body).requestId;",
+            "",
+            "const putReqBody = {",
+            "  \"partyList\": [",
+            "    {",
+            "      \"partyId\": {",
+            "        \"partyIdType\": \"MSISDN\",",
+            "        \"partyIdentifier\": \"16135551212\",",
+            "        \"partySubIdOrType\": \"string\",",
+            "        \"fspId\": \"string\",",
+            "        \"extensionList\": {",
+            "          \"extension\": [",
+            "            {",
+            "              \"key\": \"string\",",
+            "              \"value\": \"string\"",
+            "            }",
+            "          ]",
+            "        }",
+            "      }",
+            "    }",
+            "  ],",
+            "  \"currency\": \"MWK\"",
+            "}",
+            "",
+            "try {",
+            "  const response = await axios({",
+            "    method: 'put',",
+            "    url: `${outEndpoint}${putTransfersPath}/${requestId}`,",
+            "    headers: {",
+            "      'Content-Type': request.headers['content-type'],",
+            "      'Date': request.headers['date'],",
+            "      'FSPIOP-Source': request.headers['fspiop-source']",
+            "    },",
+            "    data: putReqBody",
+            "  });",
+            "  res = response.data;",
+            "  responseCode = response.code || response.status",
+            "} catch (error) {",
+            "  console.log(JSON.stringify(error));",
+            "  console.log(JSON.stringify(error.response.data));",
+            "}",
+            ""
+          ],
+          "scriptingEngine": "javascript"
+        },
+        "statusCode": "202"
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  },
+  {
+    "ruleId": 11,
+    "priority": 1,
+    "description": "delete /participants/{Type}/{ID}",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 2,
+      "type": "iso20022",
+      "asynchronous": true,
+      "specFile": "spec_files/api_definitions/fspiop_2.0_iso20022/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/fspiop_2.0_iso20022/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/fspiop_2.0_iso20022/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/fspiop_2.0_iso20022/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/fspiop_2.0_iso20022/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/participants/{Type}/{ID}"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "delete"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "scripts": {
+          "exec": [
+            "const outEndpoint = userConfig.ENDPOINTS_DFSP_WISE.dfsps.dfsp1.defaultEndpoint;",
+            "const {url} = request;",
+            "const putTransfersPath = url.path;",
+            "",
+            "const putReqBody = {",
+            "    fspId: request.headers[\"fspiop-source\"]",
+            "}",
+            "",
+            "//http://dfsp1-sdk-api-svc:4000/participants/01JYERK2ACBX1KGKYHA0RJHW6M",
+            "",
+            "try {",
+            "  const response = await axios({",
+            "    method: 'put',",
+            "    url: `${outEndpoint}${putTransfersPath}`,",
+            "    headers: {",
+            "      'Content-Type': request.headers['content-type'],",
+            "      'Date': request.headers['date'],",
+            "      'FSPIOP-Source': \"ttk-hub\"",
+            "      },",
+            "    data: putReqBody",
+            "  });",
+            "  res = response.data;",
+            "  responseCode = response.code || response.status",
+            "} catch (error) {",
+            "  console.log(JSON.stringify(error));",
+            "  console.log(JSON.stringify(error.response.data));",
+            "}"
+          ],
+          "scriptingEngine": "javascript"
+        },
+        "statusCode": "202"
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
   }
 ]
