@@ -206,5 +206,3 @@ services:
       service: core-connector
     networks:
       - mojaloop-net
-
-
