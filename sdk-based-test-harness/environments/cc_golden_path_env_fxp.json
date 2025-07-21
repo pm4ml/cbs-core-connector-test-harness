@@ -1,0 +1,16 @@
+{
+  "inputValues": {
+    "cc_incoming_url": "http://core-connector1:4010",
+    "initiating_dfsp": "tnmmalawi",
+    "counter_party_fsp": "fdhmalawi",
+    "source_currency": "MWK",
+    "source_amount": "10",
+    "target_currency": "ZMW",
+    "target_amount": "10"
+  },
+  "options": {
+    "breakOnError": false,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  }
+}

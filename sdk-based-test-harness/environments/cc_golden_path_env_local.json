@@ -1,0 +1,33 @@
+{
+  "inputValues": {
+    "payerFspId": "test-zmw-mtn-cc",
+    "payerId": "971938765",
+    "payeeFspId": "mtnmwk",
+    "payeeId": "265998571175",
+    "sendCurrency": "MWK",
+    "receiveCurrency": "XTS",
+    "desc": "School Fees",
+    "payeeIdType": "MSISDN",
+    "sendAmount": "1000",
+    "payerName": "Joshua Karame",
+    "payerDOB": "2001-01-01",
+    "payerPrvncOB": "Central Province",
+    "payerCityOB": "Lilongwe",
+    "payerCtryOB": "MW",
+    "merchantAmount": "100",
+    "sendMoneyPurposeCode": "P2P",
+    "payeeAmount": "400",
+    "payeeIdNotFound": "46733123450",
+    "invalidIdType": "EMAIL",
+    "connectorHost": "core-connector1",
+    "incomingCurrency": "ZMW",
+    "invalidCurrency": "XXX",
+    "cc_outgoing_url": "http://core-connector1:3004",
+    "cc_incoming_url": "http://core-connector1:3003"
+  },
+  "options": {
+    "breakOnError": false,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  }
+}
