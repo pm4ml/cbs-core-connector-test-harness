@@ -1,0 +1,250 @@
+{
+  "options": {
+    "breakOnError": false,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  },
+  "name": "fx_cc_golden_path",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "FXP Inbound Non Happy Path Tests",
+      "fileInfo": {
+        "path": "fx_cc_golden_path.json"
+      },
+      "meta": {
+        "info": "FXP Inbound Non Happy Path Tests"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /fxQuotes SEND Bad Request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxQuotes",
+          "path": "/fxQuotes",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "conversionRequestId": "{$function.generic.generateUUID}",
+            "conversionTerms": {
+              "conversionId": "{$function.generic.generateUUID}",
+              "determiningTransferId": "{$function.generic.generateUUID}",
+              "initiatingFsp": "{$inputs.initiating_dfsp}",
+              "counterPartyFsp": "{$inputs.counter_party_fsp}",
+              "sourceAmount": {
+                "currency": "{$inputs.source_currency}",
+                "amount": "{$inputs.source_amount}"
+              },
+              "targetAmount": {
+                "currency": "{$inputs.target_currency}"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to equal 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 2,
+          "description": "POST /fxQuotes SEND with no sourceAmount defined Bad Request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxQuotes",
+          "path": "/fxQuotes",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "conversionRequestId": "{$function.generic.generateUUID}",
+            "conversionTerms": {
+              "conversionId": "{$function.generic.generateUUID}",
+              "determiningTransferId": "{$function.generic.generateUUID}",
+              "initiatingFsp": "{$inputs.initiating_dfsp}",
+              "counterPartyFsp": "{$inputs.counter_party_fsp}",
+              "amountType": "SEND",
+              "sourceAmount": {
+                "currency": "{$inputs.source_currency}"
+              },
+              "targetAmount": {
+                "currency": "{$inputs.target_currency}"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to equal 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 3,
+          "description": "POST /fxQuotes RECEIVE with no targetAmount defined Bad Request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxQuotes",
+          "path": "/fxQuotes",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "conversionRequestId": "{$function.generic.generateUUID}",
+            "conversionTerms": {
+              "conversionId": "{$function.generic.generateUUID}",
+              "determiningTransferId": "{$function.generic.generateUUID}",
+              "initiatingFsp": "{$inputs.initiating_dfsp}",
+              "counterPartyFsp": "{$inputs.counter_party_fsp}",
+              "amountType": "SEND",
+              "sourceAmount": {
+                "currency": "{$inputs.source_currency}"
+              },
+              "targetAmount": {
+                "currency": "{$inputs.target_currency}"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to equal 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 4,
+          "description": "POST /fxTransfers Bad Request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers",
+          "path": "/fxTransfers",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response to be 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "determiningTransferId": "{$function.generic.generateUUID}",
+            "initiatingFsp": "{$inputs.initiating_dfsp}",
+            "counterPartyFsp": "{$inputs.counter_party_fsp}",
+            "sourceAmount": {
+              "currency": "{$inputs.source_currency}",
+              "amount": "{$inputs.source_amount}"
+            },
+            "targetAmount": {
+              "currency": "{$inputs.target_currency}",
+              "amount": "{$inputs.target_amount}"
+            }
+          },
+          "disabled": false
+        },
+        {
+          "id": 5,
+          "description": "PUT /fxTransfers/{commitRequestId} Bad Request",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers/{commitRequestId}",
+          "path": "/fxTransfers/{commitRequestId}",
+          "method": "put",
+          "params": {
+            "commitRequestId": ""
+          },
+          "url": "{$environment.cc_incoming_url}",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response to be 400",
+                "exec": [
+                  "expect(response.status).to.equal(400)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        }
+      ]
+    }
+  ]
+}

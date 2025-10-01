@@ -313,10 +313,10 @@
             "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
           },
           "operationPath": "/transfers/{transferId}",
-          "path": "/transfers/{$environment.sendTransferId}",
+          "path": "/transfers/{$environment.merchantTransferId}",
           "method": "get",
           "params": {
-            "transferId": "{$environment.sendTransferId}"
+            "transferId": "{$environment.merchantTransferId}"
           },
           "url": "{$inputs.cc_outgoing_url}",
           "tests": {
@@ -566,7 +566,7 @@
           "params": {
             "transferId": "f7fbf391-c29b-4534-bc86-1892568f7ad8"
           },
-          "url": "http://{$environment.connectorHost}:3003",
+          "url": "{$inputs.cc_incoming_url}",
           "body": {
             "currentState": "COMPLETED",
             "transferId": "{$function.generic.generateUUID}",
@@ -681,7 +681,7 @@
           "method": "delete",
           "params": {
             "Type": "{$environment.payeeIdType}",
-            "ID": "{$environment.payeeId}"
+            "ID": "{$environment.payeeIdToRegister}"
           },
           "url": "{$inputs.cc_outgoing_url}",
           "tests": {

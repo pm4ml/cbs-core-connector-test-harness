@@ -1,0 +1,372 @@
+{
+  "options": {
+    "breakOnError": false,
+    "transformerName": "none",
+    "generateIDType": "ulid"
+  },
+  "name": "fx_cc_golden_path",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "FXP Inbound Happy Path Tests",
+      "fileInfo": {
+        "path": "fx_cc_golden_path.json"
+      },
+      "meta": {
+        "info": "Outgoing P2P use case"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /fxQuotes  SEND Happy Path",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxQuotes",
+          "path": "/fxQuotes",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "conversionRequestId": "{$function.generic.generateUUID}",
+            "conversionTerms": {
+              "conversionId": "{$function.generic.generateUUID}",
+              "determiningTransferId": "{$function.generic.generateUUID}",
+              "initiatingFsp": "{$inputs.initiating_dfsp}",
+              "counterPartyFsp": "{$inputs.counter_party_fsp}",
+              "amountType": "SEND",
+              "sourceAmount": {
+                "currency": "{$inputs.source_currency}",
+                "amount": "{$inputs.source_amount}"
+              },
+              "targetAmount": {
+                "currency": "{$inputs.target_currency}"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "expect receive amount to be defined",
+                "exec": [
+                  "expect(response.body.conversionTerms.targetAmount.amount).not.to.equal(undefined)"
+                ]
+              },
+              {
+                "id": 3,
+                "description": "check returned currencies against requested currencies",
+                "exec": [
+                  "expect(response.body.conversionTerms.sourceAmount.currency).to.equal(request.body.conversionTerms.sourceAmount.currency)",
+                  "expect(response.body.conversionTerms.targetAmount.currency).to.equal(request.body.conversionTerms.targetAmount.currency)",
+                  "expect(response.body.conversionTerms.sourceAmount.amount).to.equal(request.body.conversionTerms.sourceAmount.amount)"
+                ]
+              },
+              {
+                "id": 4,
+                "description": "check expiration is present",
+                "exec": [
+                  "expect(response.body.conversionTerms.expiration).not.to.equal(undefined)"
+                ]
+              }
+            ]
+          },
+          "scriptingEngine": "javascript",
+          "disabled": false,
+          "scripts": {
+            "preRequest": {
+              "exec": [
+                ""
+              ]
+            },
+            "postRequest": {
+              "exec": [
+                "environment.conversionRequesId = request.body.conversionRequestId;",
+                "environment.homeTransactionId = response.body.homeTransactionId;"
+              ]
+            }
+          }
+        },
+        {
+          "id": 2,
+          "description": "POST /fxQuotes RECEIVE Happy Path ",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxQuotes",
+          "path": "/fxQuotes",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "conversionRequestId": "{$function.generic.generateUUID}",
+            "conversionTerms": {
+              "conversionId": "{$function.generic.generateUUID}",
+              "determiningTransferId": "{$function.generic.generateUUID}",
+              "initiatingFsp": "{$inputs.initiating_dfsp}",
+              "counterPartyFsp": "{$inputs.counter_party_fsp}",
+              "amountType": "RECEIVE",
+              "sourceAmount": {
+                "currency": "{$inputs.source_currency}"
+              },
+              "targetAmount": {
+                "currency": "{$inputs.target_currency}",
+                "amount": "{$inputs.target_amount}"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to be 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "expect send amount to be defined",
+                "exec": [
+                  "expect(response.body.conversionTerms.sourceAmount.amount).not.to.equal(undefined)"
+                ]
+              },
+              {
+                "id": 3,
+                "description": "check returned currencies against requested currencies",
+                "exec": [
+                  "expect(response.body.conversionTerms.sourceAmount.currency).to.equal(request.body.conversionTerms.sourceAmount.currency)",
+                  "expect(response.body.conversionTerms.targetAmount.currency).to.equal(request.body.conversionTerms.targetAmount.currency)",
+                  "expect(response.body.conversionTerms.targetAmount.amount).to.equal(request.body.conversionTerms.targetAmount.amount)"
+                ]
+              },
+              {
+                "id": 4,
+                "description": "check expiration is present",
+                "exec": [
+                  "expect(response.body.conversionTerms.expiration).not.to.equal(undefined)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 3,
+          "description": "POST /fxTransfers SEND Happy Path  ",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers",
+          "path": "/fxTransfers",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "homeTransactionId": "{$prev.1.response.body.homeTransactionId}",
+            "commitRequestId": "{$function.generic.generateUUID}",
+            "determiningTransferId": "{$function.generic.generateUUID}",
+            "initiatingFsp": "{$inputs.initiating_dfsp}",
+            "counterPartyFsp": "{$inputs.counter_party_fsp}",
+            "sourceAmount": {
+              "currency": "{$inputs.source_currency}",
+              "amount": "{$inputs.source_amount}"
+            },
+            "targetAmount": {
+              "currency": "{$inputs.target_currency}",
+              "amount": "{$inputs.target_amount}"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "expect response body to contain currentState RESERVED",
+                "exec": [
+                  "expect(response.body.conversionState).to.equal(\"RESERVED\")"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 4,
+          "description": "POST /fxTransfers RECEIVE Happy Path",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers",
+          "path": "/fxTransfers",
+          "method": "post",
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "homeTransactionId": "{$prev.2.response.body.homeTransactionId}",
+            "commitRequestId": "{$function.generic.generateUUID}",
+            "determiningTransferId": "{$function.generic.generateUUID}",
+            "initiatingFsp": "{$inputs.initiating_dfsp}",
+            "counterPartyFsp": "{$inputs.counter_party_fsp}",
+            "sourceAmount": {
+              "currency": "{$inputs.source_currency}",
+              "amount": "{$inputs.source_amount}"
+            },
+            "targetAmount": {
+              "currency": "{$inputs.target_currency}",
+              "amount": "{$inputs.target_amount}"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "expect response body to contain currentState RESERVED",
+                "exec": [
+                  "expect(response.body.conversionState).to.equal(\"RESERVED\")"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 5,
+          "description": "PUT  ​/fxTransfers​/{commitRequestId} SEND Happy Path",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers/{commitRequestId}",
+          "path": "/fxTransfers/{$prev.3.request.body.commitRequestId}",
+          "method": "put",
+          "params": {
+            "commitRequestId": "{$prev.3.request.body.commitRequestId}"
+          },
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "homeTransactionId": "{$prev.3.request.body.homeTransactionId}",
+            "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+            "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+            "conversionState": "COMMITTED"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to equal 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 6,
+          "description": "PUT  ​/fxTransfers​/{commitRequestId} RECEIVE Happy Path",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 2,
+            "type": "sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets",
+            "asynchronous": false,
+            "prefix": "/backend",
+            "specFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/sdk-scheme-adapter-backend-v2_1_0-openapi3-snippets_2.1/trigger_templates"
+          },
+          "operationPath": "/fxTransfers/{commitRequestId}",
+          "path": "/fxTransfers/{$prev.4.request.body.commitRequestId}",
+          "method": "put",
+          "params": {
+            "commitRequestId": "{$prev.4.request.body.commitRequestId}"
+          },
+          "url": "{$environment.cc_incoming_url}",
+          "body": {
+            "homeTransactionId": "{$prev.4.request.body.homeTransactionId}",
+            "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+            "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+            "conversionState": "COMMITTED"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "expect response status to equal 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        }
+      ]
+    }
+  ]
+}

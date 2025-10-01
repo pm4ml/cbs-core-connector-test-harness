@@ -23,7 +23,10 @@
     "incomingCurrency": "ZMW",
     "invalidCurrency": "XXX",
     "cc_outgoing_url": "http://core-connector1:3004",
-    "cc_incoming_url": "http://core-connector1:3003"
+    "cc_incoming_url": "http://core-connector1:3003",
+    "payeeIdToRegister": "265998571175",
+    "payeeTimeout": "265998571175",
+    "payeeAborted": "265998571175"
   },
   "options": {
     "breakOnError": false,

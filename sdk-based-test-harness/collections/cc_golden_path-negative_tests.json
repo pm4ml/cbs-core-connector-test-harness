@@ -123,45 +123,6 @@
             ]
           },
           "disabled": false
-        },
-        {
-          "id": 5,
-          "description": "Timedout Transactions are refunded Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/send-money/{transferId}",
-          "path": "/send-money/{$environment.sendTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.sendTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptRuote": true,
-            "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
         }
       ]
     },
@@ -281,84 +242,6 @@
                 "description": "Check response status code is 500",
                 "exec": [
                   "expect(response.status).to.equal(500)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 4,
-          "description": "Timedout Transactions are refunded Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/merchant-payment/{transferId}",
-          "path": "/merchant-payment/{$environment.merchantTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.merchantTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptqote": false,
-            "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
-                ]
-              }
-            ]
-          },
-          "disabled": false
-        },
-        {
-          "id": 5,
-          "description": "Aborted Transactions are refunded Test",
-          "apiVersion": {
-            "minorVersion": 0,
-            "majorVersion": 2,
-            "type": "send-money-api",
-            "asynchronous": false,
-            "additionalApi": true,
-            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
-            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
-            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
-            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
-            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
-          },
-          "operationPath": "/merchant-payment/{transferId}",
-          "path": "/merchant-payment/{$environment.merchantTransferId}",
-          "method": "put",
-          "params": {
-            "transferId": "{$environment.merchantTransferId}"
-          },
-          "url": "{$inputs.cc_outgoing_url}",
-          "body": {
-            "acceptqote": false,
-            "homeTransactionId": "{$prev.7.request.body.homeTransactionId}"
-          },
-          "tests": {
-            "assertions": [
-              {
-                "id": 1,
-                "description": "Check response status code is 400",
-                "exec": [
-                  "expect(response.status).to.equal(400)"
                 ]
               }
             ]
@@ -949,6 +832,325 @@
             ]
           },
           "disabled": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Outgoing P2P use case TimedOut Transfers",
+      "fileInfo": {
+        "path": "cc_golden_path-negative_tests.json"
+      },
+      "meta": {
+        "info": "Outgoing P2P use case"
+      },
+      "requests": [
+        {
+          "id": 2,
+          "description": "Initiate Send Money for Timedout Transfer",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$environment.payeeTimeout}",
+            "payeeIdType": "{$environment.payeeIdType}",
+            "sendAmount": "{$environment.sendAmount}",
+            "sendCurrency": "{$environment.sendCurrency}",
+            "purposeCode": "{$environment.sendMoneyPurposeCode}",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$environment.payerName}",
+              "payerId": "{$environment.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$environment.payerDOB}",
+                "PrvcOfBirth": "{$environment.payerPrvncOB}",
+                "CityOfBirth": "{$environment.payerCityOB}",
+                "CtryOfBirth": "{$environment.payerCtryOB}"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check transactionId is present in response",
+                "exec": [
+                  "expect(response.body.transactionId).not.to.equal(undefined)"
+                ]
+              }
+            ]
+          },
+          "disabled": false,
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "postRequest": {
+              "exec": [
+                "environment.sendTransferId = response.body.transactionId",
+                "",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 3,
+          "description": "PUT SendMoney Failure because of transfer time out",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/send-money/{transferId}",
+          "path": "/send-money/{$environment.sendTransferId}",
+          "method": "put",
+          "params": {
+            "transferId": "{$environment.sendTransferId}"
+          },
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "acceptQuote": false,
+            "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 4,
+          "description": "Transfer status should be ERROR_OCCURED",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/{$prev.2.response.body.transactionId}",
+          "method": "get",
+          "params": {
+            "transferId": "{$prev.2.response.body.transactionId}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check transactionId is present in response",
+                "exec": [
+                  "expect(response.body.fulfil.body.transferState).not.to.equal(COMMITTED)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Outgoing P2P use case Aborted Transfers",
+      "fileInfo": {
+        "path": "cc_golden_path-negative_tests.json"
+      },
+      "meta": {
+        "info": "Outgoing P2P use case"
+      },
+      "requests": [
+        {
+          "id": 2,
+          "description": "Initiate Send Money for Timedout Transfer",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/send-money",
+          "path": "/send-money",
+          "method": "post",
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "homeTransactionId": "{$function.generic.generateUUID}",
+            "payeeId": "{$environment.payeeAborted}",
+            "payeeIdType": "{$environment.payeeIdType}",
+            "sendAmount": "{$environment.sendAmount}",
+            "sendCurrency": "{$environment.sendCurrency}",
+            "purposeCode": "{$environment.sendMoneyPurposeCode}",
+            "transactionType": "TRANSFER",
+            "payer": {
+              "name": "{$environment.payerName}",
+              "payerId": "{$environment.payerId}",
+              "DateAndPlaceOfBirth": {
+                "BirthDt": "{$environment.payerDOB}",
+                "PrvcOfBirth": "{$environment.payerPrvncOB}",
+                "CityOfBirth": "{$environment.payerCityOB}",
+                "CtryOfBirth": "{$environment.payerCtryOB}"
+              }
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check transactionId is present in response",
+                "exec": [
+                  "expect(response.body.transactionId).not.to.equal(undefined)"
+                ]
+              }
+            ]
+          },
+          "disabled": false,
+          "scriptingEngine": "javascript",
+          "scripts": {
+            "postRequest": {
+              "exec": [
+                "environment.sendTransferId = response.body.transactionId",
+                "",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "id": 3,
+          "description": "PUT SendMoney Failure because of transfer time out",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/send-money/{transferId}",
+          "path": "/send-money/{$environment.sendTransferId}",
+          "method": "put",
+          "params": {
+            "transferId": "{$environment.sendTransferId}"
+          },
+          "url": "{$inputs.cc_outgoing_url}",
+          "body": {
+            "acceptQuote": false,
+            "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 500",
+                "exec": [
+                  "expect(response.status).to.equal(500)"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 4,
+          "description": "Transfer status should be ERROR_OCCURED",
+          "apiVersion": {
+            "minorVersion": 0,
+            "majorVersion": 2,
+            "type": "send-money-api",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/send-money-api_2.0/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/send-money-api_2.0/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/send-money-api_2.0/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/send-money-api_2.0/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/send-money-api_2.0/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/{$prev.2.response.body.transactionId}",
+          "method": "get",
+          "params": {
+            "transferId": "{$prev.2.response.body.transactionId}"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check response status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check transactionId is present in response",
+                "exec": [
+                  "expect(response.body.fulfil.body.transferState).not.to.equal(COMMITTED)"
+                ]
+              }
+            ]
+          }
         }
       ]
     }
