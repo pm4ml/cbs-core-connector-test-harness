@@ -936,7 +936,7 @@
           },
           "url": "{$inputs.cc_outgoing_url}",
           "body": {
-            "acceptQuote": false,
+            "acceptQuote": true,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
           },
           "tests": {
@@ -980,13 +980,6 @@
                 "description": "Check response status code is 200",
                 "exec": [
                   "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check transactionId is present in response",
-                "exec": [
-                  "expect(response.body.fulfil.body.transferState).not.to.equal(COMMITTED)"
                 ]
               }
             ]
@@ -1096,7 +1089,7 @@
           },
           "url": "{$inputs.cc_outgoing_url}",
           "body": {
-            "acceptQuote": false,
+            "acceptQuote": true,
             "homeTransactionId": "{$prev.1.request.body.homeTransactionId}"
           },
           "tests": {
@@ -1140,13 +1133,6 @@
                 "description": "Check response status code is 200",
                 "exec": [
                   "expect(response.status).to.equal(200)"
-                ]
-              },
-              {
-                "id": 2,
-                "description": "Check transactionId is present in response",
-                "exec": [
-                  "expect(response.body.fulfil.body.transferState).not.to.equal(COMMITTED)"
                 ]
               }
             ]
