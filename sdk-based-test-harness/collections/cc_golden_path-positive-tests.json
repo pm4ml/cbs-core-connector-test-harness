@@ -569,6 +569,7 @@
           "url": "{$inputs.cc_incoming_url}",
           "body": {
             "currentState": "COMPLETED",
+            "homeTransactionId": "{$prev.3.response.body.homeTransactionId}",
             "transferId": "{$function.generic.generateUUID}",
             "prepare": {
               "body": {
