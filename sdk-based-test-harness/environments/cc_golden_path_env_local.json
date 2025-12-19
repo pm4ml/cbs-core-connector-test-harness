@@ -26,7 +26,8 @@
     "cc_incoming_url": "http://core-connector1:3003",
     "payeeIdToRegister": "265998571175",
     "payeeTimeout": "265998571175",
-    "payeeAborted": "265998571175"
+    "payeeAborted": "265998571175",
+    "payeeIdToSend": "0950003947"
   },
   "options": {
     "breakOnError": false,
