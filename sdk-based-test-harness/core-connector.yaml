@@ -1,6 +1,6 @@
 services:
   core-connector:
-    image: infitx/tnm-mw-core-connector:v1.3.14 # edit this line to set image name
+    image: elijahokello/test-dfsp-cc:v2 # edit this line to set image name
     env_file: ./core-connector.env 
     ports:
       - "13003:3003"

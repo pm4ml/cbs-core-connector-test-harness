@@ -37,6 +37,7 @@
           "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
+            "subId": "{$environment.subId}",
             "payeeId": "{$environment.payeeId}",
             "payeeIdType": "{$environment.payeeIdType}",
             "sendAmount": "{$environment.sendAmount}",
@@ -199,6 +200,7 @@
           "url": "{$inputs.cc_outgoing_url}",
           "body": {
             "homeTransactionId": "{$function.generic.generateUUID}",
+            "subId": "{$environment.subId}",
             "payeeId": "{$environment.payeeId}",
             "payeeIdType": "{$environment.payeeIdType}",
             "receiveAmount": "{$environment.merchantAmount}",

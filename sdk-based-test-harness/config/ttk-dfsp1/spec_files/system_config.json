@@ -110,6 +110,13 @@
       "folderPath": "send-money-api_2.0",
       "asynchronous": false,
       "additionalApi": true
+    },
+    {
+      "type": "send-money",
+      "version": "3.0",
+      "folderPath": "send-money_3.0",
+      "asynchronous": false,
+      "additionalApi": true
     }
   ]
 }

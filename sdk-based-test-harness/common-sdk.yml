@@ -8,7 +8,7 @@ services:
   api-svc:
     networks:
         - mojaloop-net
-    image: mojaloop/sdk-scheme-adapter:v24.10.3
+    image: mojaloop/sdk-scheme-adapter:v24.18.0
     command: yarn nx run modules-api-svc:start
     user: root # Set Root so we can install Curl for Healthchecks
     healthcheck:

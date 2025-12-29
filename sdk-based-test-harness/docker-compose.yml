@@ -206,3 +206,36 @@ services:
       service: core-connector
     networks:
       - mojaloop-net
+  
+  core-connector2:
+    image: elijahokello/test-dfsp-cc:v2 
+    environment:
+      # === Server Settings ===
+      SDK_SERVER_HOST: 0.0.0.0
+      SDK_SERVER_PORT: 3003
+      CBS_NAME: tnm-mw-dfsp-cc
+      DFSP_SERVER_HOST: 0.0.0.0
+      DFSP_SERVER_PORT: 3004
+      DFSP_API_SPEC: ./src/api-spec/send-money-api.yaml
+      SDK_API_SPEC_FILE: ./api-spec/core-connector-api-spec-sdk.yml
+      MODE: dfsp
+
+      # === SDK Scheme Adapter ===
+      SDK_BASE_URL: http://dfsp1-sdk-api-svc:4001
+
+      # === CBS Settings ===
+      FSP_ID: bluebank
+      LEI: 1234567890ABCDEFGHIJK
+      CURRENCY: GMD
+      SUPPORTED_ID_TYPE: MSISDN
+
+      # === CBS Config Settings ===
+      BLUE_BANK_URL: https://api.bluebank.mw
+      BLUE_BANK_CLIENT_ID: my-bluebank-client-id
+      BLUE_BANK_CLIENT_SECRET: my-bluebank-client-secret
+      CURRENCY_MODE: single
+    ports:
+      - "13005:3003"
+      - "13006:3004"
+    networks:
+      - mojaloop-net
